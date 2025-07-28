@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764528743499",
+    "project_id": "deiyar",
+    "storage_bucket": "deiyar.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764528743499:android:31615e0c53d8e0d49ca9ce",
+        "android_client_info": {
+          "package_name": "com.example.diyar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZWVcS6dVei-hP1zARe1yfx3joIWhl1_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
