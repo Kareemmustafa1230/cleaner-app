@@ -195,6 +195,7 @@ class LangKeys {
   // مفاتيح login
   static const String welcomeBack = 'welcomeBack';
   static const String loginToAccessAccount = 'loginToAccessAccount';
+  static const String phone = 'phone';
   static const String password = 'password';
   static const String rememberMe = 'rememberMe';
   static const String login = 'login';
@@ -207,6 +208,8 @@ class LangKeys {
   static const String loginSuccessfully = 'loginSuccessfully';
   static const String loginError = 'loginError';
   static const String pleaseEnterEmail = 'pleaseEnterEmail';
+  static const String pleaseEnterPhone = 'pleaseEnterPhone';
+  static const String pleaseEnterValidPhone = 'pleaseEnterValidPhone';
   static const String pleaseEnterPassword = 'pleaseEnterPassword';
   static const String passwordStrength = 'passwordStrength';
   
@@ -251,5 +254,64 @@ class LangKeys {
   static const String inventoryRecentItems = 'inventoryRecentItems';
   static const String inventoryAvailable = 'inventoryAvailable';
   static const String inventoryQuantity = 'inventoryQuantity';
+  
+  // مفاتيح صفحة الإشعارات
+  static const String loadingNotifications = 'loadingNotifications';
+  static const String noNotifications = 'noNotifications';
+  static const String newNotification = 'newNotification';
+  static const String noContent = 'noContent';
+  static const String errorOccurred = 'errorOccurred';
+  static const String retry = 'retry';
+  static const String agoDays = 'agoDays';
+  static const String agoHours = 'agoHours';
+  static const String agoMinutes = 'agoMinutes';
+  static const String now = 'now';
+  
+  // مفاتيح سجل المخزون في النظافة
+  static const String cleaningInventoryLog = 'cleaningInventoryLog';
+  static const String basicCleaning = 'basicCleaning';
+  static const String totalCleaning = 'totalCleaning';
+  static const String costSummary = 'costSummary';
+  static const String cleaningServicePrice = 'cleaningServicePrice';
+  static const String laborCost = 'laborCost';
+  static const String totalInventoryCost = 'totalInventoryCost';
+  static const String grandTotal = 'grandTotal';
+  
+  // مفاتيح المبيدات الحشرية الجديدة
+  static const String pestControlRecords = 'pestControlRecords';
+  static const String pestControlType = 'pestControlType';
+  static const String basicPestControl = 'basicPestControl';
+  static const String deepPestControl = 'deepPestControl';
+  static const String selectPestControlType = 'selectPestControlType';
+  static const String pleaseSelectPestControlType = 'pleaseSelectPestControlType';
+  static const String showPestControl = 'showPestControl';
+  static const String hidePestControl = 'hidePestControl';
+  static const String pestControlImages = 'pestControlImages';
+  static const String pestControlVideos = 'pestControlVideos';
+  static const String noPestControlImages = 'noPestControlImages';
+  static const String noPestControlVideos = 'noPestControlVideos';
+  static const String trySelectAnotherDate = 'trySelectAnotherDate';
+  
+  // مفاتيح الصيانة الجديدة
+  static const String maintenanceRecords = 'maintenanceRecords';
+  static const String maintenanceType = 'maintenanceType';
+  static const String basicMaintenance = 'basicMaintenance';
+  static const String comprehensiveMaintenance = 'comprehensiveMaintenance';
+  static const String selectMaintenanceType = 'selectMaintenanceType';
+  static const String pleaseSelectMaintenanceType = 'pleaseSelectMaintenanceType';
+  static const String showMaintenance = 'showMaintenance';
+  static const String hideMaintenance = 'hideMaintenance';
+  static const String maintenanceImages = 'maintenanceImages';
+  static const String maintenanceVideos = 'maintenanceVideos';
+  static const String noMaintenanceImages = 'noMaintenanceImages';
+  static const String noMaintenanceVideos = 'noMaintenanceVideos';
+  
+  // مفاتيح تسجيل الخروج وحذف الحساب
+  static const String signOutTitle = 'signOutTitle';
+  static const String signOutMessage = 'signOutMessage';
+  static const String deleteAccountTitle = 'deleteAccountTitle';
+  static const String deleteAccountMessage = 'deleteAccountMessage';
+  static const String deleteAccountWarning = 'deleteAccountWarning';
+  static const String confirm = 'confirm';
 }
 

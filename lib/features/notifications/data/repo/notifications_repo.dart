@@ -14,31 +14,8 @@ class NotificationsRepo {
       final response = await _notificationsDataSource.notifications(page);
       return ApiResult.success(response);
     } catch (error) {
-      // التعامل مع خطأ 429 بشكل خاص
-      if (error.toString().contains('Too Many Requests')) {
-        print('⚠️ Rate limit error in repo: $error');
-        return ApiResult.failure(ErrorHandler.handle(error));
-      }
-      
-      // التعامل مع أخطاء الشبكة
-      if (error.toString().contains('Network Timeout') ||
-          error.toString().contains('Connection Error')) {
-        print('⚠️ Network error in repo: $error');
-        return ApiResult.failure(ErrorHandler.handle(error));
-      }
-      
-      print('❌ Error in notifications repo: $error');
       return ApiResult.failure(ErrorHandler.handle(error));
     }
   }
 
-  //notificationsAllRead
-  // Future<ApiResult<PackagesSubscribeResponse>> notificationsAllRead() async {
-  //   try {
-  //     final response = await _notificationsDataSource.notificationsAllRead();
-  //     return ApiResult.success(response);
-  //   } catch (error) {
-  //     return ApiResult.failure(ErrorHandler.handle(error));
-  //   }
-  // }
 } 

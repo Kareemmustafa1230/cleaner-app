@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/language/lang_keys.dart';
+import '../../../../core/widget/anmiate_builder.dart';
 import '../../../apartment/ui/screen/apartment_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -324,155 +325,159 @@ class _HomeScreenState extends State<HomeScreen> {
                 itemCount: _apartments.length,
                 itemBuilder: (context, index) {
                   final apartment = _apartments[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(15.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: ColorApp.shadowLight,
-                          blurRadius: 20,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                      border: Border.all(
-                        color: ColorApp.borderLight,
-                        width: 1,
-                      ),
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
+                  return AnimateBuilder(
+                    columnCount: 2,
+                    position: index,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
                         borderRadius: BorderRadius.circular(15.r),
-                        onTap: () {
-                          context.pushWithSlideTransition(
-                            screen: ApartmentDetailsScreen(
-                              apartmentId: apartment['id'],
-                              apartmentName: apartment['name'],
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(12.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              // صورة الشقة
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    image: DecorationImage(
-                                      image: AssetImage(apartment['image']),
-                                      fit: BoxFit.cover,
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorApp.shadowLight,
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: ColorApp.borderLight,
+                          width: 1,
+                        ),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(15.r),
+                          onTap: () {
+                            context.pushWithSlideTransition(
+                              screen: ApartmentDetailsScreen(
+                                apartmentId: apartment['id'],
+                                apartmentName: apartment['name'],
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(12.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                // صورة الشقة
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      image: DecorationImage(
+                                        image: AssetImage(apartment['image']),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 8.h),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    // اسم الشقة
-                                    Text(
-                                      apartment['name'],
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                      color: ColorApp.textPrimary,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Cairo',
+                                SizedBox(height: 8.h),
+                                Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      // اسم الشقة
+                                      Text(
+                                        apartment['name'],
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                        color: ColorApp.textPrimary,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Cairo',
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    // الدور
-                                    Text(
-                                      apartment['floor'],
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                      color: ColorApp.textSecondary,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Cairo',
+                                      // الدور
+                                      Text(
+                                        apartment['floor'],
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                        color: ColorApp.textSecondary,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Cairo',
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    // عدد الغرف والحمامات
-                                    Text(
-                                      '${apartment['rooms']} • ${apartment['bathrooms']}',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                      color: ColorApp.textSecondary,
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Cairo',
+                                      // عدد الغرف والحمامات
+                                      Text(
+                                        '${apartment['rooms']} • ${apartment['bathrooms']}',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                        color: ColorApp.textSecondary,
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Cairo',
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  SizedBox(height: 6.h),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
+                                    SizedBox(height: 6.h),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 6.w,
+                                                vertical: 3.h,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: _getCleaningStatusColor(apartment['cleaning_status']).withOpacity(0.1),
+                                                borderRadius: BorderRadius.circular(6.r),
+                                                border: Border.all(
+                                                  color: _getCleaningStatusColor(apartment['cleaning_status']).withOpacity(0.3),
+                                                  width: 1,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                _getTranslatedCleaningStatus(apartment['cleaning_status'], context),
+                                                style: TextStyle(
+                                                  color: _getCleaningStatusColor(apartment['cleaning_status']),
+                                                  fontSize: 10.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'Cairo',
+                                                ),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                          ),
+                                        SizedBox(width: 8.w),
+                                          Container(
                                             padding: EdgeInsets.symmetric(
-                                              horizontal: 6.w,
-                                              vertical: 3.h,
+                                              horizontal: 4.w,
+                                              vertical: 2.h,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: _getCleaningStatusColor(apartment['cleaning_status']).withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(6.r),
+                                              color: _getStatusColor(apartment['status']).withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(4.r),
                                               border: Border.all(
-                                                color: _getCleaningStatusColor(apartment['cleaning_status']).withOpacity(0.3),
+                                                color: _getStatusColor(apartment['status']).withOpacity(0.3),
                                                 width: 1,
                                               ),
                                             ),
                                             child: Text(
-                                              _getTranslatedCleaningStatus(apartment['cleaning_status'], context),
+                                              _getTranslatedStatus(apartment['status'], context),
                                               style: TextStyle(
-                                                color: _getCleaningStatusColor(apartment['cleaning_status']),
-                                                fontSize: 10.sp,
+                                                color: _getStatusColor(apartment['status']),
+                                                fontSize: 8.sp,
                                                 fontWeight: FontWeight.w600,
                                                 fontFamily: 'Cairo',
                                               ),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
                                             ),
                                           ),
-                                        ),
-                                      SizedBox(width: 8.w),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 4.w,
-                                            vertical: 2.h,
-                                          ),
-                                          decoration: BoxDecoration(
-                                            color: _getStatusColor(apartment['status']).withOpacity(0.1),
-                                            borderRadius: BorderRadius.circular(4.r),
-                                            border: Border.all(
-                                              color: _getStatusColor(apartment['status']).withOpacity(0.3),
-                                              width: 1,
-                                            ),
-                                          ),
-                                          child: Text(
-                                            _getTranslatedStatus(apartment['status'], context),
-                                            style: TextStyle(
-                                              color: _getStatusColor(apartment['status']),
-                                              fontSize: 8.sp,
-                                              fontWeight: FontWeight.w600,
-                                              fontFamily: 'Cairo',
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                              ),
-                            ],
+                                        ],
+                                      ),
+                                    ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

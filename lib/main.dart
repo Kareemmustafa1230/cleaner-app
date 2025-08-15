@@ -11,18 +11,22 @@ import 'core/notification_services/device_token.dart';
 import 'core/notification_services/notification_services.dart';
 import 'core/router/app_router.dart';
 import 'features/auth/ui/screen/biometric_auth_screen.dart';
-import 'features/notifications/data/model/notifications_response.dart';
+import 'firebase_options.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   NotificationService.handleNotificationNavigation(message);
 }
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase first
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await setupGetIt();

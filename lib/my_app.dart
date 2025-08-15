@@ -29,7 +29,7 @@ class Diyar extends StatelessWidget {
                 onGenerateRoute: appRouter.generateRoute,
                 initialRoute: getIt<SharedPrefHelper>().getData(key: ApiKey.authorization) != null
                     ? Routes.home
-                    : Routes.home,
+                    : Routes.loginScreen,
                 locale: Locale(context.read<AppCubit>().languageCode),
                 supportedLocales: AppLocalizationsSetup.supportedLocales,
                 localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,

@@ -1,10 +1,16 @@
+import 'package:diyar/core/helpers/extensions.dart';
+import 'package:diyar/features/notifications/logic/cubit/mark_read_cubit.dart';
 import 'package:diyar/features/notifications/logic/cubit/notifications_cubit.dart';
+import 'package:diyar/features/notifications/logic/state/mark_read_state.dart';
 import 'package:diyar/features/notifications/logic/state/notifications_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../../core/language/lang_keys.dart';
+import '../../../../core/notification_services/notification_services.dart';
+import '../../../../core/theme/Color/colors.dart';
 import '../../data/model/notifications_response.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -29,6 +35,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
     context.read<NotificationsCubit>().fetchFirstPage();
     _scrollController.addListener(_onScroll);
   }
+
+  // Future<void> _cancelNotificationsIfUnread() async {
+  //   final cubit = context.read<NotificationsCubit>();
+  //   final unreadCount = cubit.state.maybeWhen(
+  //     success: (notificationsResponse) => notificationsResponse.data?.unreadCount ?? 0,
+  //     orElse: () => 0,
+  //   );
+  //   print("objects$unreadCount");
+  //   if (unreadCount > 0) {
+  //     await NotificationService.cancelAllNotifications();
+  //   }
+  // }
 
   void _initializeAnimations() {
     _fadeController = AnimationController(
@@ -63,7 +81,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
   void _onScroll() {
     if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
       final cubit = context.read<NotificationsCubit>();
-      if (cubit.hasMore && !cubit.isLoading) {
+      if (cubit.hasMore) {
         cubit.fetchNextPage();
       }
     }
@@ -71,8 +89,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
 
   @override
   void dispose() {
-    // إلغاء الطلبات المعلقة عند إغلاق الشاشة
-    context.read<NotificationsCubit>().cancelPendingRequests();
     _fadeController.dispose();
     _slideController.dispose();
     _scrollController.dispose();
@@ -82,38 +98,61 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: ColorApp.backgroundSecondary,
       appBar: _buildAppBar(),
       body: FadeTransition(
         opacity: _fadeAnimation,
         child: SlideTransition(
           position: _slideAnimation,
-          child: BlocConsumer<NotificationsCubit, NotificationsState>(
-            listener: (context, state) {
-              state.maybeWhen(
-                error: (error) {
-                  // عدم عرض رسالة الخطأ إذا كان خطأ 429 (سيتم التعامل معه تلقائياً)
-                  if (!error.contains('تم تجاوز الحد المسموح للطلبات')) {
-                    _showErrorSnackBar(error);
-                  }
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<NotificationsCubit, NotificationsState>(
+                listener: (context, state) async {
+                  state.maybeWhen(
+                    success: (notificationsResponse) async {
+                      final unreadCount = notificationsResponse.data?.unreadCount ?? 0;
+                      print("objects$unreadCount");
+                      if (unreadCount > 0) {
+                        await NotificationService.cancelAllNotifications();
+                      }
+                      context.read<MarkReadCubit>().markRead();
+                    },
+                    error: (error) => _showErrorSnackBar(error),
+                    orElse: () {},
+                  );
                 },
-                orElse: () {},
-              );
-            },
-            builder: (context, state) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: state.when(
-                      initial: () => const SizedBox(),
-                      loading: () => _buildLoadingState(),
-                      success: (notificationsResponse) => _buildSuccessState(notificationsResponse),
-                      error: (error) => _buildErrorState(error),
+              ),
+              BlocListener<MarkReadCubit, MarkReadState>(
+                listener: (context, state) {
+                  state.whenOrNull(
+                    success: (message) {
+                      // يمكن إضافة رسالة نجاح هنا إذا كان مطلوباً
+                      // _showSuccessSnackBar(message);
+                    },
+                    error: (error) {
+                      // يمكن إضافة رسالة خطأ هنا إذا كان مطلوباً
+                      // _showErrorSnackBar(error);
+                    },
+                  );
+                },
+              ),
+            ],
+            child: BlocBuilder<NotificationsCubit, NotificationsState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: state.when(
+                        initial: () => const SizedBox(),
+                        loading: () => _buildLoadingState(),
+                        success: (notificationsResponse) => _buildSuccessState(notificationsResponse),
+                        error: (error) => _buildErrorState(error),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
+                  ],
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -122,28 +161,35 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorApp.backgroundPrimary,
       elevation: 0,
       centerTitle: true,
       title: Text(
-        'الإشعارات',
+        context.translate(LangKeys.notifications),
         style: TextStyle(
           fontSize: 22.sp,
           fontWeight: FontWeight.w700,
-          color: const Color(0xFF1A1A1A),
+          color: ColorApp.textPrimary,
           letterSpacing: 0.5,
         ),
       ),
       leading: Container(
         margin: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
-          color: const Color(0xFFF8F9FA),
+          color: ColorApp.backgroundSecondary,
           borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: ColorApp.shadowLight,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
         child: IconButton(
           icon: Icon(
             Icons.arrow_back_ios_new,
-            color: const Color(0xFF1A1A1A),
+            color: ColorApp.textPrimary,
             size: 20.sp,
           ),
           onPressed: () => Navigator.pop(context),
@@ -157,43 +203,24 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
     );
   }
 
-
   void _showErrorSnackBar(String message) {
-    // عدم عرض رسالة الخطأ إذا كان خطأ 429 أو خطأ إعادة المحاولة
-    if (message.contains('تم تجاوز الحد المسموح للطلبات') ||
-        message.contains('فشل في تحميل الإشعارات بعد عدة محاولات')) {
-      return;
-    }
-    
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Row(
           children: [
-            Icon(Icons.error_outline, color: Colors.white, size: 20.sp),
+            Icon(Icons.error_outline, color: ColorApp.textInverse, size: 20.sp),
             SizedBox(width: 12.w),
             Expanded(child: Text(message)),
           ],
         ),
-        backgroundColor: const Color(0xFFDC3545),
+        backgroundColor: ColorApp.error,
         duration: const Duration(seconds: 3),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         margin: EdgeInsets.all(16.w),
-        action: SnackBarAction(
-          label: 'إعادة المحاولة',
-          textColor: Colors.white,
-          onPressed: () {
-            final cubit = context.read<NotificationsCubit>();
-            if (!cubit.isLoading) {
-              cubit.fetchFirstPage();
-            }
-          },
-        ),
       ),
     );
   }
-
-
 
   Widget _buildLoadingState() {
     return Center(
@@ -203,11 +230,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
           Container(
             padding: EdgeInsets.all(24.w),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorApp.backgroundPrimary,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.08),
+                  color: ColorApp.shadowMedium,
                   blurRadius: 20,
                   offset: const Offset(0, 8),
                 ),
@@ -221,11 +248,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  'جاري تحميل الإشعارات...',
+                  context.translate(LangKeys.loadingNotifications),
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
-                    color: const Color(0xFF1A1A1A),
+                    color: ColorApp.textPrimary,
                   ),
                 ),
               ],
@@ -244,13 +271,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
     }
     return RefreshIndicator(
       onRefresh: () async {
-        // التحقق من عدم وجود طلب معلق قبل إعادة التحميل
-        if (!cubit.isLoading) {
-          context.read<NotificationsCubit>().fetchFirstPage();
-        }
+        context.read<NotificationsCubit>().fetchFirstPage();
       },
-      color: const Color(0xFF28A745),
-      backgroundColor: Colors.white,
+      color: ColorApp.success,
+      backgroundColor: ColorApp.backgroundPrimary,
       child: ListView.builder(
         controller: _scrollController,
         padding: EdgeInsets.all(16.w),
@@ -260,21 +284,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
             return Padding(
               padding: EdgeInsets.symmetric(vertical: 16.h),
               child: Center(
-                child: Column(
-                  children: [
-                    CircularProgressIndicator(
-                      color: const Color(0xFF28A745),
-                      strokeWidth: 2,
-                    ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      'جاري التحميل...',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: const Color(0xFF6C757D),
-                      ),
-                    ),
-                  ],
+                child: CircularProgressIndicator(
+                  color: ColorApp.success,
+                  strokeWidth: 2,
                 ),
               ),
             );
@@ -295,20 +307,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       margin: EdgeInsets.only(bottom: 12.h),
       child: GestureDetector(
         onTap: () {
-          // يمكنك هنا إضافة منطق إضافي مثل فتح تفاصيل الإشعار
         },
       child: Container(
         padding: EdgeInsets.all(16.w),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: ColorApp.backgroundPrimary,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isUnread ? const Color(0xFF28A745).withOpacity(0.2) : Colors.transparent,
+            color: isUnread ? ColorApp.success.withOpacity(0.2) : ColorApp.borderLight,
             width: 1.5,
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: ColorApp.shadowLight,
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -336,7 +347,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
               ),
               child: Icon(
                 notificationType.icon,
-                color: Colors.white,
+                color: ColorApp.textInverse,
                 size: 22.sp,
               ),
             ),
@@ -349,11 +360,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     children: [
                       Expanded(
                         child: Text(
-                          notification.title ?? 'إشعار جديد',
+                          notification.title ?? context.translate(LangKeys.newNotification),
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w700,
-                            color: const Color(0xFF1A1A1A),
+                            color: ColorApp.textPrimary,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -365,11 +376,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                   ),
                   SizedBox(height: 6.h),
                   Text(
-                    notification.message ?? 'لا يوجد محتوى',
+                    notification.message ?? context.translate(LangKeys.noContent),
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFF6C757D),
+                      color: ColorApp.textSecondary,
                       height: 1.4,
                     ),
                     maxLines: 3,
@@ -381,7 +392,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                       Icon(
                         Icons.access_time,
                         size: 12.sp,
-                        color: const Color(0xFFADB5BD),
+                        color: ColorApp.textLight,
                       ),
                       SizedBox(width: 4.w),
                       Expanded(
@@ -390,7 +401,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
-                            color: Colors.black,
+                            color: ColorApp.textSecondary,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -413,27 +424,37 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       case 'order':
         return NotificationType(
           icon: Icons.shopping_bag,
-          gradientColors: [const Color(0xFF007BFF), const Color(0xFF0056B3)],
+          gradientColors: [ColorApp.primaryBlue, ColorApp.secondaryBlue],
         );
       case 'payment':
         return NotificationType(
           icon: Icons.payment,
-          gradientColors: [const Color(0xFF28A745), const Color(0xFF1E7E34)],
+          gradientColors: [ColorApp.success, ColorApp.success.withOpacity(0.8)],
         );
       case 'delivery':
         return NotificationType(
           icon: Icons.local_shipping,
-          gradientColors: [const Color(0xFFFFC107), const Color(0xFFE0A800)],
+          gradientColors: [ColorApp.warning, ColorApp.warning.withOpacity(0.8)],
         );
       case 'promotion':
         return NotificationType(
           icon: Icons.local_offer,
-          gradientColors: [const Color(0xFFDC3545), const Color(0xFFC82333)],
+          gradientColors: [ColorApp.error, ColorApp.error.withOpacity(0.8)],
+        );
+      case 'maintenance':
+        return NotificationType(
+          icon: Icons.build,
+          gradientColors: [ColorApp.info, ColorApp.info.withOpacity(0.8)],
+        );
+      case 'cleaning':
+        return NotificationType(
+          icon: Icons.cleaning_services,
+          gradientColors: [ColorApp.success, ColorApp.success.withOpacity(0.8)],
         );
       default:
         return NotificationType(
           icon: Icons.notifications,
-          gradientColors: [const Color(0xFF6F42C1), const Color(0xFF5A2D91)],
+          gradientColors: [ColorApp.primaryBlue, ColorApp.secondaryBlue],
         );
     }
   }
@@ -450,52 +471,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                   width: 250.w,
                     height: 250.h,
                   ),
+                 SizedBox(height: 24.h),
+                 Text(
+                   context.translate(LangKeys.noNotifications),
+                   style: TextStyle(
+                     fontSize: 16.sp,
+                     fontWeight: FontWeight.w600,
+                     color: ColorApp.textPrimary,
+                   ),
+                  ),
                 ],
               ),
             ),
-    );
-  }
-
-  Widget _buildTestButton({
-    required VoidCallback onPressed,
-    required IconData icon,
-    required String label,
-    required Color color,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [color, color.withOpacity(0.8)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: ElevatedButton.icon(
-        onPressed: onPressed,
-        icon: Icon(icon, color: Colors.white, size: 18.sp),
-        label: Text(
-          label,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-        ),
-      ),
     );
   }
 
@@ -509,11 +496,11 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
             Container(
               padding: EdgeInsets.all(32.w),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: ColorApp.backgroundPrimary,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.08),
+                    color: ColorApp.shadowMedium,
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -525,22 +512,22 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     width: 80.w,
                     height: 80.w,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFFF5F5),
+                      color: ColorApp.error.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(40),
                     ),
                     child: Icon(
                       Icons.error_outline,
                       size: 40.sp,
-                      color: const Color(0xFFDC3545),
+                      color: ColorApp.error,
                     ),
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    'حدث خطأ',
+                    context.translate(LangKeys.errorOccurred),
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF1A1A1A),
+                      color: ColorApp.textPrimary,
                     ),
                   ),
                   SizedBox(height: 8.h),
@@ -549,7 +536,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
-                      color: const Color(0xFF6C757D),
+                      color: ColorApp.textSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -557,14 +544,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [const Color(0xFF28A745), const Color(0xFF1E7E34)],
+                        colors: [ColorApp.success, ColorApp.success.withOpacity(0.8)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF28A745).withOpacity(0.3),
+                          color: ColorApp.success.withOpacity(0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -572,17 +559,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
                     ),
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        // التحقق من عدم وجود طلب معلق قبل إعادة المحاولة
-                        final cubit = context.read<NotificationsCubit>();
-                        if (!cubit.isLoading) {
-                          cubit.fetchFirstPage();
-                        }
+                        context.read<NotificationsCubit>().fetchFirstPage();
                       },
-                      icon: Icon(Icons.refresh, color: Colors.white, size: 18.sp),
+                      icon: Icon(Icons.refresh, color: ColorApp.textInverse, size: 18.sp),
                       label: Text(
-                        'إعادة المحاولة',
+                        context.translate(LangKeys.retry),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: ColorApp.textInverse,
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w600,
                         ),
@@ -618,13 +601,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> with TickerPr
       // الوقت النسبي
       String relativeTime;
       if (difference.inDays > 0) {
-        relativeTime = 'منذ ${difference.inDays} يوم';
+        relativeTime = context.translate(LangKeys.agoDays).replaceAll('{days}', difference.inDays.toString());
       } else if (difference.inHours > 0) {
-        relativeTime = 'منذ ${difference.inHours} ساعة';
+        relativeTime = context.translate(LangKeys.agoHours).replaceAll('{hours}', difference.inHours.toString());
       } else if (difference.inMinutes > 0) {
-        relativeTime = 'منذ ${difference.inMinutes} دقيقة';
+        relativeTime = context.translate(LangKeys.agoMinutes).replaceAll('{minutes}', difference.inMinutes.toString());
       } else {
-        relativeTime = 'الآن';
+        relativeTime = context.translate(LangKeys.now);
       }
 
       // إرجاع التاريخ الفعلي مع الوقت النسبي
@@ -696,7 +679,7 @@ class _AnimatedPulseDotState extends State<_AnimatedPulseDot> with SingleTickerP
                     width: 14,
                     height: 14,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF28A745),
+                      color: ColorApp.success,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -708,11 +691,11 @@ class _AnimatedPulseDotState extends State<_AnimatedPulseDot> with SingleTickerP
             width: 10,
             height: 10,
             decoration: BoxDecoration(
-              color: const Color(0xFF28A745),
+              color: ColorApp.success,
               borderRadius: BorderRadius.circular(5),
               boxShadow: [
                 BoxShadow(
-                  color: const Color(0xFF28A745).withOpacity(0.4),
+                  color: ColorApp.success.withOpacity(0.4),
                   blurRadius: 4,
                   offset: const Offset(0, 1),
                 ),
