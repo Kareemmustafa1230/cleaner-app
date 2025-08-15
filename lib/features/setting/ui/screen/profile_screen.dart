@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'dart:convert';
+import '../../../../core/theme/text_style/text_style.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/helpers/shared_pref_helper.dart';
@@ -67,10 +69,13 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
     try {
       final sharedPref = getIt<SharedPrefHelper>();
       final userDataString = await sharedPref.getData(key: ApiKey.userData);
-
+      
+      print('🔍 محاولة تحميل بيانات المستخدم: $userDataString');
+      
       if (userDataString != null && userDataString.isNotEmpty) {
         final userData = jsonDecode(userDataString);
-
+        print('📋 بيانات المستخدم المحملة: $userData');
+        
         // تحديث البيانات مباشرة في Controllers
         _nameController.text = userData['name'] ?? '';
         _emailController.text = userData['email'] ?? '';
@@ -94,6 +99,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         });
       }
     } catch (e) {
+      print('❌ خطأ في تحميل بيانات المستخدم: $e');
       // في حالة الخطأ، استخدم بيانات افتراضية
       _nameController.text = 'أحمد محمد';
       _emailController.text = 'ahmed@example.com';
@@ -108,6 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
 
     @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     final theme = Theme.of(context);
     
     return Scaffold(
@@ -195,6 +202,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       ),
     );
   }
+  
+  
 
   Future<void> _handleSaveProfile() async {
     if (!_formKey.currentState!.validate()) {
@@ -210,10 +219,12 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
       final sharedPref = getIt<SharedPrefHelper>();
       final currentUserDataString = await sharedPref.getData(key: ApiKey.userData);
       
-
+      print('💾 محاولة حفظ بيانات الملف الشخصي المحدثة');
+      
       if (currentUserDataString != null && currentUserDataString.isNotEmpty) {
         final currentUserData = jsonDecode(currentUserDataString);
-
+        print('📋 البيانات الحالية: $currentUserData');
+        
         // تحديث البيانات
         final updatedUserData = {
           ...currentUserData,
@@ -223,7 +234,8 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
           'address': _addressController.text.trim(),
         };
         
-
+        print('📝 البيانات المحدثة: $updatedUserData');
+        
         // حفظ البيانات المحدثة
         await sharedPref.saveData(
           key: ApiKey.userData,
@@ -275,6 +287,7 @@ class _ProfileScreenState extends State<ProfileScreen> with TickerProviderStateM
         });
       }
     } catch (e) {
+      print('خطأ في حفظ بيانات الملف الشخصي: $e');
       if (mounted) {
         final theme = Theme.of(context);
         ScaffoldMessenger.of(context).showSnackBar(

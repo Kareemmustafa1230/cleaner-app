@@ -1,23 +1,9 @@
 class ApiConstants {
   static const String baserUrl = "https://clean.deiyar.com/api/";
   static const String login = "login";
-  static const String register = "driver/register";
-  static const String sendOtp = "driver/verify-otp";
-  static const String reverifyOtp = "driver/reverify-otp";
-  static const String enterPhone = "driver/forgot-password";
-  static const String resetPassword = "driver/reset-password";
+  static const String logout = "logout";
+
   //static const String uploadImage = "driver/upload-image-before-register";
-  static const String profileImage = "driver/upload/profile-image";
-  static const String carImage = "driver/upload/car-image";
-  static const String idCard = "driver/upload/id-card";
-  static const String license = "driver/upload/license";
-  static const String wallet = "driver/wallet";
-  static const String walletTransactions = "driver/wallet/transactions";
-  static const String walletWithdraw = "driver/wallet/withdraw";
-  static const String walletDeposit = "driver/wallet/deposit";
-  static const String getBookings = "driver/bookings";
-  static const String confirmBooking = "driver/bookings/{id}/confirm";
-  static const String rejectBooking = "driver/bookings/{id}/reject";
   static const String notifications = "/notifications";
   static const String markRead = "/notifications/mark-all-read";
   static const String unreadCount = "/notifications/unread-count";

@@ -6,6 +6,7 @@ import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/app_cubit/app_cubit.dart';
+import '../../../../core/theme/text_style/text_style.dart';
 import '../../../login/ui/screen/login.dart';
 import 'profile_screen.dart';
 import 'change_password_screen.dart';
@@ -112,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               title: context.translate(LangKeys.appColor),
                               subtitle: context.translate(LangKeys.appColorDesc),
                               onTap: () {
-                                _showColorPickerDialog();
+                                // TODO: سيتم إضافة هذه الميزة قريباً
                               },
                             ),
                           ],
@@ -205,7 +206,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               title: context.translate(LangKeys.aboutApp),
                               subtitle: context.translate(LangKeys.aboutAppDesc),
                               onTap: () {
-                                _showAboutDialog();
+                                // TODO: سيتم إضافة هذه الميزة قريباً
                               },
                             ),
                             _buildListTile(
@@ -262,7 +263,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(15.r),
                               onTap: () {
-                                _showDeleteAccountDialog();
+                                _deleteAccount(context);
                               },
                               child: Center(
                                 child: Row(
@@ -307,7 +308,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(15.r),
                               onTap: () {
-                                _showLogoutDialog();
+                                _signOut(context);
                               },
                               child: Center(
                                                                   child: Text(
@@ -476,238 +477,86 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showColorPickerDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'اختر لون التطبيق',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'سيتم إضافة هذه الميزة قريباً',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'حسناً',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  void _showClearDataDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'مسح البيانات',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        content: Text(
-          'هل أنت متأكد من حذف جميع البيانات؟ لا يمكن التراجع عن هذا الإجراء.',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'إلغاء',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // تنفيذ مسح البيانات
-            },
-            child: Text(
-              'مسح',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  void _showAboutDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'حول التطبيق',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'شركة دييار',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Cairo',
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              'إصدار 1.0.0',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontFamily: 'Cairo',
-              ),
-            ),
-            SizedBox(height: 8.h),
-            Text(
-              'تطبيق إدارة الشقق والعقارات',
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'حسناً',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  void _showLogoutDialog() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'تسجيل الخروج',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        content: Text(
-          'هل أنت متأكد من تسجيل الخروج؟',
-          style: TextStyle(
-            fontSize: 14.sp,
-            fontFamily: 'Cairo',
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'إلغاء',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text(
-              'تسجيل الخروج',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  void _showDeleteAccountDialog() {
+
+
+
+
+  void _signOut(BuildContext context) {
+    // TODO: Implement sign out logic
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.r),
-        ),
         title: Row(
           children: [
-            Container(
-              padding: EdgeInsets.all(8.w),
-              decoration: BoxDecoration(
-                color: Colors.red.shade100,
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-              child: Icon(
-                Icons.warning_amber_rounded,
-                color: Colors.red.shade600,
-                size: 24.sp,
+            Image.asset(
+              'assets/icons/exit.png',
+              width: 24,
+              height: 24,
+              color: ColorApp.primaryBlue,
+            ),
+            SizedBox(width: 10.w),
+            Text(
+              context.translate(LangKeys.signOutTitle),
+              style: TextStyleApp.font16whiteFFWeight700.copyWith(
+                color: ColorApp.black,
               ),
             ),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Text(
-                'حذف الحساب',
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Cairo',
-                  color: Colors.red.shade600,
-                ),
+          ],
+        ),
+        content: Text(
+          context.translate(LangKeys.signOutMessage),
+          style: TextStyleApp.font12grey6BWeight400.copyWith(
+            color: ColorApp.black,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              context.translate(LangKeys.cancel),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: ColorApp.grey,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              // TODO: Implement actual sign out
+            },
+            child: Text(
+              context.translate(LangKeys.confirm),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: ColorApp.primaryBlue,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _deleteAccount(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/icons/delete_account.png',
+              width: 24,
+              height: 24,
+              color: Colors.red,
+            ),
+            SizedBox(width: 10.w),
+            Text(
+              context.translate(LangKeys.deleteAccountTitle),
+              style: TextStyleApp.font16whiteFFWeight700.copyWith(
+                color: ColorApp.black,
               ),
             ),
           ],
@@ -717,55 +566,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'تحذير: هذا الإجراء نهائي ولا يمكن التراجع عنه!',
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-                color: Colors.red.shade600,
+              context.translate(LangKeys.deleteAccountMessage),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: ColorApp.black,
               ),
             ),
-            SizedBox(height: 12.h),
+            SizedBox(height: 10.h),
             Text(
-              'سيتم حذف جميع البيانات المرتبطة بحسابك نهائياً:',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: 'Cairo',
-                color: Theme.of(context).colorScheme.onBackground,
-              ),
-            ),
-            SizedBox(height: 8.h),
-            _buildDeleteItem(Icons.person, 'الملف الشخصي'),
-            _buildDeleteItem(Icons.photo_library, 'الصور والفيديوهات'),
-            _buildDeleteItem(Icons.assessment, 'التقارير والبيانات'),
-            _buildDeleteItem(Icons.settings, 'الإعدادات المخصصة'),
-            SizedBox(height: 16.h),
-            Container(
-              padding: EdgeInsets.all(12.w),
-              decoration: BoxDecoration(
-                color: Colors.red.shade50,
-                borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: Colors.red.shade200),
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: Colors.red.shade600,
-                    size: 16.sp,
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    child: Text(
-                      'للمتابعة، اكتب "حذف" في الحقل أدناه',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontFamily: 'Cairo',
-                        color: Colors.red.shade600,
-                      ),
-                    ),
-                  ),
-                ],
+              context.translate(LangKeys.deleteAccountWarning),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: Colors.red,
+                fontSize: 11.sp,
               ),
             ),
           ],
@@ -774,30 +585,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: Text(
-              'إلغاء',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
+              context.translate(LangKeys.cancel),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: ColorApp.grey,
               ),
             ),
           ),
-          ElevatedButton(
+          TextButton(
             onPressed: () {
-              _showDeleteConfirmationDialog();
+              Navigator.pop(context);
+              // TODO: Implement actual account deletion
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red.shade600,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-            ),
             child: Text(
-              'حذف الحساب',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Cairo',
+              context.translate(LangKeys.confirm),
+              style: TextStyleApp.font12grey6BWeight400.copyWith(
+                color: Colors.red,
               ),
             ),
           ),
@@ -830,124 +632,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _showDeleteConfirmationDialog() {
-    final TextEditingController confirmController = TextEditingController();
-    
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          'تأكيد الحذف',
-          style: TextStyle(
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w700,
-            fontFamily: 'Cairo',
-            color: Colors.red.shade600,
-          ),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'اكتب "حذف" لتأكيد حذف حسابك نهائياً:',
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontFamily: 'Cairo',
-              ),
-            ),
-            SizedBox(height: 16.h),
-            TextField(
-              controller: confirmController,
-              decoration: InputDecoration(
-                hintText: 'اكتب "حذف" هنا',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: BorderSide(color: Colors.red.shade400),
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'إلغاء',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (confirmController.text.trim() == 'حذف') {
-                Navigator.pop(context); // إغلاق نافذة التأكيد
-                Navigator.pop(context); // إغلاق نافذة الحذف
-                _executeDeleteAccount();
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      'يرجى كتابة "حذف" بالضبط',
-                      style: TextStyle(fontFamily: 'Cairo'),
-                    ),
-                    backgroundColor: Colors.red.shade600,
-                  ),
-                );
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red.shade600,
-              foregroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
-              ),
-            ),
-            child: Text(
-              'تأكيد الحذف',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontFamily: 'Cairo',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
-  void _executeDeleteAccount() {
-    // هنا يتم تنفيذ حذف الحساب
-    // يمكن إضافة API call لحذف الحساب من الخادم
-    
-    // عرض رسالة نجاح
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(Icons.check_circle, color: Colors.white),
-            SizedBox(width: 8.w),
-            Text(
-              'تم حذف الحساب بنجاح',
-              style: TextStyle(fontFamily: 'Cairo'),
-            ),
-          ],
-        ),
-        backgroundColor: Colors.green.shade600,
-        duration: Duration(seconds: 3),
-      ),
-    );
-    
-    // الانتقال لصفحة تسجيل الدخول
-    Future.delayed(Duration(seconds: 2), () {
-      context.pushAndClearStack(
-        const LoginScreen(),
-      );
-    });
-  }
+
+
 } 

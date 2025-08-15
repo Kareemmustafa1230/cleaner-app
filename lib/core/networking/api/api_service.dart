@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:diyar/features/login/data/model/login_request_body.dart';
 import 'package:diyar/features/notifications/data/model/mark_read_response.dart';
+import 'package:diyar/features/setting/data/model/logout_response.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../features/login/data/model/login_response.dart';
 import '../../../features/notifications/data/model/notifications_response.dart';
@@ -19,6 +20,10 @@ abstract class ApiService {
     @Header('Accept') String accept,
     );
 
+  @POST(ApiConstants.logout)
+  Future<LogoutResponse> logout(
+      @Header('Accept') String accept,
+      );
 
 
   @GET(ApiConstants.notifications)

@@ -272,5 +272,12 @@
   "maintenanceImages": "Maintenance Images",
   "maintenanceVideos": "Maintenance Videos",
   "noMaintenanceImages": "No images available for this date",
-  "noMaintenanceVideos": "No videos available for this date"
+  "noMaintenanceVideos": "No videos available for this date",
+  
+  "signOutTitle": "Sign Out",
+  "signOutMessage": "Are you sure you want to sign out?",
+  "deleteAccountTitle": "Delete Account",
+  "deleteAccountMessage": "Are you sure you want to permanently delete your account?",
+  "deleteAccountWarning": "Warning: This action is final and cannot be undone!",
+  "confirm": "Confirm"
 }

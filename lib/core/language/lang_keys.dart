@@ -305,5 +305,13 @@ class LangKeys {
   static const String maintenanceVideos = 'maintenanceVideos';
   static const String noMaintenanceImages = 'noMaintenanceImages';
   static const String noMaintenanceVideos = 'noMaintenanceVideos';
+  
+  // مفاتيح تسجيل الخروج وحذف الحساب
+  static const String signOutTitle = 'signOutTitle';
+  static const String signOutMessage = 'signOutMessage';
+  static const String deleteAccountTitle = 'deleteAccountTitle';
+  static const String deleteAccountMessage = 'deleteAccountMessage';
+  static const String deleteAccountWarning = 'deleteAccountWarning';
+  static const String confirm = 'confirm';
 }
 

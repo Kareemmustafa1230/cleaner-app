@@ -15,7 +15,7 @@ LoginRequestBody _$LoginRequestBodyFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LoginRequestBodyToJson(LoginRequestBody instance) =>
     <String, dynamic>{
-      if (instance.phone case final value?) 'phone': value,
-      if (instance.email case final value?) 'email': value,
+      'phone': instance.phone,
+      'email': instance.email,
       'password': instance.password,
     };

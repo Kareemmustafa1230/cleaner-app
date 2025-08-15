@@ -272,5 +272,12 @@
   "maintenanceImages": "صور الصيانة",
   "maintenanceVideos": "فيديوهات الصيانة",
   "noMaintenanceImages": "لا توجد صور متاحة لهذا التاريخ",
-  "noMaintenanceVideos": "لا توجد فيديوهات متاحة لهذا التاريخ"
+  "noMaintenanceVideos": "لا توجد فيديوهات متاحة لهذا التاريخ",
+  
+  "signOutTitle": "تسجيل الخروج",
+  "signOutMessage": "هل أنت متأكد من تسجيل الخروج؟",
+  "deleteAccountTitle": "حذف الحساب",
+  "deleteAccountMessage": "هل أنت متأكد من حذف حسابك نهائياً؟",
+  "deleteAccountWarning": "تحذير: هذا الإجراء نهائي ولا يمكن التراجع عنه!",
+  "confirm": "تأكيد"
 }
