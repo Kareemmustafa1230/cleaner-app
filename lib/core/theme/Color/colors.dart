@@ -82,4 +82,5 @@ class ColorApp {
   static const grey6B = grey;
   static const grey61 = darkGrey;
   static const greyD9 = borderLight;
+  static const greyF5 = Color(0xFFF5F5F5);
 }

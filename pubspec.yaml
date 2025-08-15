@@ -66,6 +66,7 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   # easy way to add shimmer effect
   shimmer: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
   connectivity_plus: ^6.0.5
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -143,7 +144,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svg/
-    - assets/core/
+    - assets/lottie/
     - assets/icons/
     - lang/ar.json
     - lang/en.json

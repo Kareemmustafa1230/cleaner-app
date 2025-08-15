@@ -1,6 +1,6 @@
 class ApiConstants {
-  static const String baserUrl = "https://driver.tek-part.com/api/";
-  static const String login = "driver/login";
+  static const String baserUrl = "https://clean.deiyar.com/api/";
+  static const String login = "login";
   static const String register = "driver/register";
   static const String sendOtp = "driver/verify-otp";
   static const String reverifyOtp = "driver/reverify-otp";
@@ -19,7 +19,8 @@ class ApiConstants {
   static const String confirmBooking = "driver/bookings/{id}/confirm";
   static const String rejectBooking = "driver/bookings/{id}/reject";
   static const String notifications = "/notifications";
-
+  static const String markRead = "/notifications/mark-all-read";
+  static const String unreadCount = "/notifications/unread-count";
 
 
 
@@ -29,6 +30,7 @@ class ApiConstants {
 
 class ApiKey {
   static String id = "id";
+  static String userData = "userData";
   static String name = "name";
   static String type = "type";
   static String phone = "phone";
@@ -43,6 +45,8 @@ class ApiKey {
   static String imagePath = "imagePath";
   static String themeMode = "themeMode";
   static String fcm = "fcm";
+  static String address = "address";
+  static String email = "email";
 
 
 

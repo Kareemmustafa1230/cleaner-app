@@ -19,8 +19,8 @@ class DioFactory {
         ..options.followRedirects = true
         ..options.maxRedirects = 5
         ..options.validateStatus = (status) {
-          // قبول جميع الحالات ما عدا 429 (Too Many Requests)
-          return status != null && status < 500 && status != 429;
+          // قبول فقط الاستجابات الناجحة (200-299) ما عدا 429 (Too Many Requests)
+          return status != null && status >= 200 && status < 300 && status != 429;
         };
       dio!.interceptors.add(DioInterceptor());
 

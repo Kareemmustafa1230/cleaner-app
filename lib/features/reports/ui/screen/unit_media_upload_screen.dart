@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/widget/image_picker.dart';
-import '../../../../core/language/app_localizations.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/helpers/extensions.dart';
 
@@ -280,141 +279,129 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // نوع الوسائط
+                            // عنوان نوع الوسائط
+              Text(
+                context.translate(LangKeys.mediaType),
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: ColorApp.primaryBlue,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Cairo',
+                ),
+              ),
+              SizedBox(height: 16.h),
+              
+              // شريط التبويبات الرئيسي - نفس تصميم تفاصيل الشقة
               Container(
-                padding: EdgeInsets.all(16.w),
                 decoration: BoxDecoration(
-                  color: ColorApp.white,
-                  borderRadius: BorderRadius.circular(15.r),
+                  color: ColorApp.backgroundSecondary,
+                  borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
                     color: ColorApp.borderLight,
                     width: 1,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      context.translate(LangKeys.mediaType),
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        color: ColorApp.primaryBlue,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Cairo',
-                      ),
-                    ),
-                    SizedBox(height: 16.h),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          Container(
-                            width: 120.w,
-                            child: _buildMediaTypeButton(
-                              title: context.translate(LangKeys.cleanlinessMedia),
-                              icon: Icons.cleaning_services,
-                              isSelected: _selectedMediaType == 'cleanliness',
-                              onTap: () {
-                                setState(() {
-                                  _selectedMediaType = 'cleanliness';
-                                  _selectedCleaningType = '';
-                                  _cleaningPriceController.clear();
-                                  _damagePriceController.clear();
-                                  _maintenancePriceController.clear();
-                                  _pestControlPriceController.clear();
-                                  _maintenanceDescriptionController.clear();
-                                  _pestControlDescriptionController.clear();
-                                  _descriptionController.clear();
-                                  _usedItems.clear();
-                                  _selectedCleaningTiming = 'before'; // الافتراضي: قبل النظافة
-                                  _selectedMaintenanceTiming = 'before';
-                                  _selectedPestControlTiming = 'before';
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Container(
-                            width: 120.w,
-                            child: _buildMediaTypeButton(
-                              title: context.translate(LangKeys.damagesMedia),
-                              icon: Icons.build,
-                              isSelected: _selectedMediaType == 'damages',
-                              onTap: () {
-                                setState(() {
-                                  _selectedMediaType = 'damages';
-                                  _selectedCleaningType = '';
-                                  _cleaningPriceController.clear();
-                                  _damagePriceController.clear();
-                                  _maintenancePriceController.clear();
-                                  _pestControlPriceController.clear();
-                                  _maintenanceDescriptionController.clear();
-                                  _pestControlDescriptionController.clear();
-                                  _descriptionController.clear();
-                                  _usedItems.clear();
-                                  _selectedCleaningTiming = 'before'; // الافتراضي: قبل النظافة
-                                  _selectedMaintenanceTiming = 'before';
-                                  _selectedPestControlTiming = 'before';
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Container(
-                            width: 120.w,
-                            child: _buildMediaTypeButton(
-                              title: context.translate(LangKeys.pestControlMedia),
-                              icon: Icons.bug_report,
-                              isSelected: _selectedMediaType == 'pestControl',
-                              onTap: () {
-                                setState(() {
-                                  _selectedMediaType = 'pestControl';
-                                  _selectedCleaningType = '';
-                                  _cleaningPriceController.clear();
-                                  _damagePriceController.clear();
-                                  _maintenancePriceController.clear();
-                                  _pestControlPriceController.clear();
-                                  _maintenanceDescriptionController.clear();
-                                  _pestControlDescriptionController.clear();
-                                  _descriptionController.clear();
-                                  _usedItems.clear();
-                                  _selectedCleaningTiming = 'before';
-                                  _selectedMaintenanceTiming = 'before';
-                                  _selectedPestControlTiming = 'before';
-                                });
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 12.w),
-                          Container(
-                            width: 120.w,
-                            child: _buildMediaTypeButton(
-                              title: context.translate(LangKeys.maintenanceMedia),
-                              icon: Icons.handyman,
-                              isSelected: _selectedMediaType == 'maintenance',
-                              onTap: () {
-                                setState(() {
-                                  _selectedMediaType = 'maintenance';
-                                  _selectedCleaningType = '';
-                                  _cleaningPriceController.clear();
-                                  _damagePriceController.clear();
-                                  _maintenancePriceController.clear();
-                                  _pestControlPriceController.clear();
-                                  _maintenanceDescriptionController.clear();
-                                  _pestControlDescriptionController.clear();
-                                  _descriptionController.clear();
-                                  _usedItems.clear();
-                                  _selectedCleaningTiming = 'before';
-                                  _selectedMaintenanceTiming = 'before';
-                                  _selectedPestControlTiming = 'before';
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: ColorApp.shadowLight,
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
                     ),
                   ],
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _buildMediaTypeButton(
+                        title: context.translate(LangKeys.cleanlinessMedia),
+                        icon: Icons.cleaning_services,
+                        isSelected: _selectedMediaType == 'cleanliness',
+                        onTap: () {
+                          setState(() {
+                            _selectedMediaType = 'cleanliness';
+                            _selectedCleaningType = '';
+                            _cleaningPriceController.clear();
+                            _damagePriceController.clear();
+                            _maintenancePriceController.clear();
+                            _pestControlPriceController.clear();
+                            _maintenanceDescriptionController.clear();
+                            _pestControlDescriptionController.clear();
+                            _descriptionController.clear();
+                            _usedItems.clear();
+                            _selectedCleaningTiming = 'before'; // الافتراضي: قبل النظافة
+                            _selectedMaintenanceTiming = 'before';
+                            _selectedPestControlTiming = 'before';
+                          });
+                        },
+                      ),
+                      _buildMediaTypeButton(
+                        title: context.translate(LangKeys.damagesMedia),
+                        icon: Icons.build,
+                        isSelected: _selectedMediaType == 'damages',
+                        onTap: () {
+                          setState(() {
+                            _selectedMediaType = 'damages';
+                            _selectedCleaningType = '';
+                            _cleaningPriceController.clear();
+                            _damagePriceController.clear();
+                            _maintenancePriceController.clear();
+                            _pestControlPriceController.clear();
+                            _maintenanceDescriptionController.clear();
+                            _pestControlDescriptionController.clear();
+                            _descriptionController.clear();
+                            _usedItems.clear();
+                            _selectedCleaningTiming = 'before'; // الافتراضي: قبل النظافة
+                            _selectedMaintenanceTiming = 'before';
+                            _selectedPestControlTiming = 'before';
+                          });
+                        },
+                      ),
+                      _buildMediaTypeButton(
+                        title: context.translate(LangKeys.pestControlMedia),
+                        icon: Icons.bug_report,
+                        isSelected: _selectedMediaType == 'pestControl',
+                        onTap: () {
+                          setState(() {
+                            _selectedMediaType = 'pestControl';
+                            _selectedCleaningType = '';
+                            _cleaningPriceController.clear();
+                            _damagePriceController.clear();
+                            _maintenancePriceController.clear();
+                            _pestControlPriceController.clear();
+                            _maintenanceDescriptionController.clear();
+                            _pestControlDescriptionController.clear();
+                            _descriptionController.clear();
+                            _usedItems.clear();
+                            _selectedCleaningTiming = 'before';
+                            _selectedMaintenanceTiming = 'before';
+                            _selectedPestControlTiming = 'before';
+                          });
+                        },
+                      ),
+                      _buildMediaTypeButton(
+                        title: context.translate(LangKeys.maintenanceMedia),
+                        icon: Icons.handyman,
+                        isSelected: _selectedMediaType == 'maintenance',
+                        onTap: () {
+                          setState(() {
+                            _selectedMediaType = 'maintenance';
+                            _selectedCleaningType = '';
+                            _cleaningPriceController.clear();
+                            _damagePriceController.clear();
+                            _maintenancePriceController.clear();
+                            _pestControlPriceController.clear();
+                            _maintenanceDescriptionController.clear();
+                            _pestControlDescriptionController.clear();
+                            _descriptionController.clear();
+                            _usedItems.clear();
+                            _selectedCleaningTiming = 'before';
+                            _selectedMaintenanceTiming = 'before';
+                            _selectedPestControlTiming = 'before';
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 24.h),
@@ -1736,39 +1723,47 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 4.w),
         padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
         decoration: BoxDecoration(
-          gradient: isSelected
+          gradient: isSelected 
               ? LinearGradient(
-                  colors: [Theme.of(context).colorScheme.primary, Theme.of(context).colorScheme.secondary],
+                  colors: [ColorApp.gradientStart, ColorApp.gradientEnd],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 )
               : null,
-          color: isSelected ? null : Theme.of(context).colorScheme.background,
-          borderRadius: BorderRadius.circular(10.r),
+          color: isSelected ? null : ColorApp.backgroundSecondary,
+          borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: isSelected ? Colors.transparent : Theme.of(context).dividerColor,
+            color: isSelected ? Colors.transparent : ColorApp.borderLight,
             width: 1,
           ),
+          boxShadow: isSelected ? [
+            BoxShadow(
+              color: ColorApp.shadowLight.withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ] : null,
         ),
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               icon,
-              color: isSelected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.primary,
-              size: 24.sp,
+              color: isSelected ? ColorApp.textInverse : ColorApp.primaryBlue,
+              size: 18.sp,
             ),
-            SizedBox(height: 8.h),
+            SizedBox(width: 8.w),
             Text(
               title,
               style: TextStyle(
-                color: isSelected ? Theme.of(context).colorScheme.onPrimary : Theme.of(context).colorScheme.primary,
-                fontSize: 12.sp,
+                color: isSelected ? ColorApp.textInverse : ColorApp.primaryBlue,
+                fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
                 fontFamily: 'Cairo',
               ),
-              textAlign: TextAlign.center,
             ),
           ],
         ),

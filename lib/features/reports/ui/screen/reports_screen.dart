@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/Color/colors.dart';
-import '../../../../core/language/app_localizations.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/helpers/extensions.dart';
+import '../../../../core/widget/anmiate_builder.dart';
 import 'unit_media_upload_screen.dart';
 
 class ApartmentsMediaScreen extends StatefulWidget {
@@ -160,111 +160,115 @@ class _ApartmentsMediaScreenState extends State<ApartmentsMediaScreen> {
                 itemCount: _filteredApartments.length,
                 itemBuilder: (context, index) {
                   final apartment = _filteredApartments[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.background,
-                      borderRadius: BorderRadius.circular(15.r),
-                      boxShadow: [
-                        BoxShadow(
-                          color: ColorApp.shadowLight,
-                          blurRadius: 20,
-                          offset: const Offset(0, 8),
-                        ),
-                      ],
-                      border: Border.all(
-                        color: ColorApp.borderLight,
-                        width: 1,
-                      ),
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
+                  return AnimateBuilder(
+                      columnCount: 2,
+                      position: index,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.background,
                         borderRadius: BorderRadius.circular(15.r),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UnitMediaUploadScreen(
-                                selectedUnit: apartment,
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorApp.shadowLight,
+                            blurRadius: 20,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: ColorApp.borderLight,
+                          width: 1,
+                        ),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(15.r),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => UnitMediaUploadScreen(
+                                  selectedUnit: apartment,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.all(12.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // صورة الشقة
-                              Expanded(
-                                flex: 3,
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.r),
-                                    image: DecorationImage(
-                                      image: AssetImage('assets/images/apartment.png'),
-                                      fit: BoxFit.cover,
+                            );
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.all(12.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // صورة الشقة
+                                Expanded(
+                                  flex: 3,
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12.r),
+                                      image: DecorationImage(
+                                        image: AssetImage('assets/images/apartment.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(height: 8.h),
-                              // تفاصيل الشقة
-                              Expanded(
-                                flex: 2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    // اسم الشقة
-                                    Text(
-                                      apartment['name'] ?? '',
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: Theme.of(context).colorScheme.onBackground,
-                                        fontWeight: FontWeight.w700,
-                                        fontFamily: 'Cairo',
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    // المبنى
-                                    Text(
-                                      apartment['building'] ?? '',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: 'Cairo',
-                                      ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    // أيقونة الشقة
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.apartment,
-                                          color: Theme.of(context).colorScheme.primary,
-                                          size: 16.sp,
+                                SizedBox(height: 8.h),
+                                // تفاصيل الشقة
+                                Expanded(
+                                  flex: 2,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      // اسم الشقة
+                                      Text(
+                                        apartment['name'] ?? '',
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: Theme.of(context).colorScheme.onBackground,
+                                          fontWeight: FontWeight.w700,
+                                          fontFamily: 'Cairo',
                                         ),
-                                        SizedBox(width: 4.w),
-                                        Text(
-                                          context.translate(LangKeys.residentialApartment),
-                                          style: TextStyle(
-                                            fontSize: 11.sp,
-                                            color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Cairo',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      // المبنى
+                                      Text(
+                                        apartment['building'] ?? '',
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Cairo',
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                      // أيقونة الشقة
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.apartment,
+                                            color: Theme.of(context).colorScheme.primary,
+                                            size: 16.sp,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
+                                          SizedBox(width: 4.w),
+                                          Text(
+                                            context.translate(LangKeys.residentialApartment),
+                                            style: TextStyle(
+                                              fontSize: 11.sp,
+                                              color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Cairo',
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
