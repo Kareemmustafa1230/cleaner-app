@@ -1,9 +1,12 @@
+import 'package:diyar/features/home_page/data/model/apartment_search.dart';
+import 'package:diyar/features/home_page/data/model/apartment_search_response.dart';
 import 'package:diyar/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'core/helpers/bloc_observer.dart';
 import 'core/helpers/shared_pref_helper.dart';
 import 'core/networking/di/dependency_injection.dart';
@@ -23,10 +26,18 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize Firebase first
+  await Hive.initFlutter();
+  if (await Hive.boxExists('apartmentBox')) {
+    await Hive.deleteBoxFromDisk('apartmentBox');
+  }
+  Hive.registerAdapter(ApartmentSearchResponseAdapter());
+  Hive.registerAdapter(DataAdapter());
+  Hive.registerAdapter(ChaletsAdapter());
+  Hive.registerAdapter(PaginationAdapter());
+  await Hive.openBox('apartmentBox');
+
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await setupGetIt();

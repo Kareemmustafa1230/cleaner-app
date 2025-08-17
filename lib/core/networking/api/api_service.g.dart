@@ -96,16 +96,56 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<LogoutResponse> updatePassword(
+    ChangePasswordRequest changePasswordRequest,
+    String accept,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Accept': accept};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(changePasswordRequest.toJson());
+    final _options = _setStreamType<LogoutResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'password',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LogoutResponse _value;
+    try {
+      _value = LogoutResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ApartmentSearchResponse> apartmentSearch(
     String page,
     String search,
+    String accept,
   ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'search': search,
     };
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Accept': accept};
+    _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<ApartmentSearchResponse>(Options(
       method: 'GET',

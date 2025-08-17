@@ -20,7 +20,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   late Animation<double> _scaleAnimation;
 
   final List<Widget> _pages = [
-    const HomeScreen(),
+    const HomePage(),
     const ApartmentsMediaScreen(),
     const InventoryScreen(),
     const SettingsScreen(),

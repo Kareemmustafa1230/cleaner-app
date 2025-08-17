@@ -28,7 +28,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       chalets: (json['chalets'] as List<dynamic>?)
           ?.map((e) => Chalets.fromJson(e as Map<String, dynamic>))
           .toList(),
-      searchResultsCount: (json['searchResultsCount'] as num?)?.toInt(),
+      searchResultsCount: (json['search_results_count'] as num?)?.toInt(),
       pagination: json['pagination'] == null
           ? null
           : Pagination.fromJson(json['pagination'] as Map<String, dynamic>),
@@ -36,7 +36,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
 
 Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'chalets': instance.chalets,
-      'searchResultsCount': instance.searchResultsCount,
+      'search_results_count': instance.searchResultsCount,
       'pagination': instance.pagination,
     };
 
@@ -50,12 +50,12 @@ Chalets _$ChaletsFromJson(Map<String, dynamic> json) => Chalets(
       description: json['description'] as String?,
       status: json['status'] as String?,
       type: json['type'] as String?,
-      isCleaned: json['isCleaned'] as bool?,
-      isBooked: json['isBooked'] as bool?,
+      isCleaned: json['is_cleaned'] as bool?,
+      isBooked: json['is_booked'] as bool?,
       image: json['image'] as String?,
-      imagesCount: (json['imagesCount'] as num?)?.toInt(),
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
+      imagesCount: (json['images_count'] as num?)?.toInt(),
+      createdAt: json['created_at'] as String?,
+      updatedAt: json['updated_at'] as String?,
     );
 
 Map<String, dynamic> _$ChaletsToJson(Chalets instance) => <String, dynamic>{
@@ -68,18 +68,18 @@ Map<String, dynamic> _$ChaletsToJson(Chalets instance) => <String, dynamic>{
       'description': instance.description,
       'status': instance.status,
       'type': instance.type,
-      'isCleaned': instance.isCleaned,
-      'isBooked': instance.isBooked,
+      'is_cleaned': instance.isCleaned,
+      'is_booked': instance.isBooked,
       'image': instance.image,
-      'imagesCount': instance.imagesCount,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'images_count': instance.imagesCount,
+      'created_at': instance.createdAt,
+      'updated_at': instance.updatedAt,
     };
 
 Pagination _$PaginationFromJson(Map<String, dynamic> json) => Pagination(
-      currentPage: (json['currentPage'] as num?)?.toInt(),
-      lastPage: (json['lastPage'] as num?)?.toInt(),
-      perPage: (json['perPage'] as num?)?.toInt(),
+      currentPage: (json['current_page'] as num?)?.toInt(),
+      lastPage: (json['last_page'] as num?)?.toInt(),
+      perPage: (json['per_page'] as num?)?.toInt(),
       total: (json['total'] as num?)?.toInt(),
       from: (json['from'] as num?)?.toInt(),
       to: (json['to'] as num?)?.toInt(),
@@ -87,9 +87,9 @@ Pagination _$PaginationFromJson(Map<String, dynamic> json) => Pagination(
 
 Map<String, dynamic> _$PaginationToJson(Pagination instance) =>
     <String, dynamic>{
-      'currentPage': instance.currentPage,
-      'lastPage': instance.lastPage,
-      'perPage': instance.perPage,
+      'current_page': instance.currentPage,
+      'last_page': instance.lastPage,
+      'per_page': instance.perPage,
       'total': instance.total,
       'from': instance.from,
       'to': instance.to,

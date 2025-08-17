@@ -8,8 +8,10 @@ import '../../../../core/language/lang_keys.dart';
 import '../../../../core/helpers/extensions.dart';
 
 class UnitMediaUploadScreen extends StatefulWidget {
-  final Map<String, String>? selectedUnit;
-  const UnitMediaUploadScreen({super.key, this.selectedUnit});
+  final String selectedUnit;
+  // final String apartmentId;
+  // final String apartmentName;
+    const UnitMediaUploadScreen({super.key, required this.selectedUnit});
 
   @override
   State<UnitMediaUploadScreen> createState() => _UnitMediaUploadScreenState();
@@ -160,7 +162,7 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> {
   void initState() {
     super.initState();
     if (widget.selectedUnit != null) {
-      _selectedUnit = widget.selectedUnit!['id'] ?? '';
+      _selectedUnit = widget.selectedUnit ?? '';
     }
   }
 
@@ -261,7 +263,7 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> {
         ),
         title: Text(
           widget.selectedUnit != null
-              ? '${widget.selectedUnit!['name']} - ${widget.selectedUnit!['building']}'
+              ? '${widget.selectedUnit} - ${widget.selectedUnit}'
               : context.translate(LangKeys.unitMediaUpload),
           style: TextStyle(
             fontSize: 20.sp,

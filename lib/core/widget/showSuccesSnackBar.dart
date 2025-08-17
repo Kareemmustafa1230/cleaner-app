@@ -21,7 +21,7 @@ void showSuccesSnackBar(
             width: 50,
             height: 50,
             child: Lottie.asset(
-              'assets/lottie/Animation - 1712410608562.json',
+              'assets/lottie/confirm_account.json',
               width: 50,
               height: 50,
               fit: BoxFit.fill,

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'logout_state.dart';
+part of 'apartment_search_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,83 +15,79 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$LogoutState {
+mixin _$ApartmentSearchState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(ApartmentSearchResponse apartmentSearchResponse)
+        success,
     required TResult Function(String error) error,
-    required TResult Function() formUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult Function(String error)? error,
-    TResult Function()? formUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(_Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LogoutStateCopyWith<$Res> {
-  factory $LogoutStateCopyWith(
-          LogoutState value, $Res Function(LogoutState) then) =
-      _$LogoutStateCopyWithImpl<$Res, LogoutState>;
+abstract class $ApartmentSearchStateCopyWith<$Res> {
+  factory $ApartmentSearchStateCopyWith(ApartmentSearchState value,
+          $Res Function(ApartmentSearchState) then) =
+      _$ApartmentSearchStateCopyWithImpl<$Res, ApartmentSearchState>;
 }
 
 /// @nodoc
-class _$LogoutStateCopyWithImpl<$Res, $Val extends LogoutState>
-    implements $LogoutStateCopyWith<$Res> {
-  _$LogoutStateCopyWithImpl(this._value, this._then);
+class _$ApartmentSearchStateCopyWithImpl<$Res,
+        $Val extends ApartmentSearchState>
+    implements $ApartmentSearchStateCopyWith<$Res> {
+  _$ApartmentSearchStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -104,24 +100,24 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ApartmentSearchStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$InitialImpl implements Initial {
+class _$InitialImpl implements _Initial {
   const _$InitialImpl();
 
   @override
   String toString() {
-    return 'LogoutState.initial()';
+    return 'ApartmentSearchState.initial()';
   }
 
   @override
@@ -138,9 +134,9 @@ class _$InitialImpl implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(ApartmentSearchResponse apartmentSearchResponse)
+        success,
     required TResult Function(String error) error,
-    required TResult Function() formUpdated,
   }) {
     return initial();
   }
@@ -150,9 +146,8 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
   }) {
     return initial?.call();
   }
@@ -162,9 +157,8 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult Function(String error)? error,
-    TResult Function()? formUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -176,11 +170,10 @@ class _$InitialImpl implements Initial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
   }) {
     return initial(this);
   }
@@ -188,11 +181,10 @@ class _$InitialImpl implements Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
   }) {
     return initial?.call(this);
   }
@@ -200,11 +192,10 @@ class _$InitialImpl implements Initial {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(_Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -214,8 +205,8 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements LogoutState {
-  const factory Initial() = _$InitialImpl;
+abstract class _Initial implements ApartmentSearchState {
+  const factory _Initial() = _$InitialImpl;
 }
 
 /// @nodoc
@@ -227,13 +218,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$ApartmentSearchStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -244,7 +235,7 @@ class _$LoadingImpl implements Loading {
 
   @override
   String toString() {
-    return 'LogoutState.loading()';
+    return 'ApartmentSearchState.loading()';
   }
 
   @override
@@ -261,9 +252,9 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(ApartmentSearchResponse apartmentSearchResponse)
+        success,
     required TResult Function(String error) error,
-    required TResult Function() formUpdated,
   }) {
     return loading();
   }
@@ -273,9 +264,8 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
   }) {
     return loading?.call();
   }
@@ -285,9 +275,8 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult Function(String error)? error,
-    TResult Function()? formUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -299,11 +288,10 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
   }) {
     return loading(this);
   }
@@ -311,11 +299,10 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
   }) {
     return loading?.call(this);
   }
@@ -323,11 +310,10 @@ class _$LoadingImpl implements Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(_Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -337,7 +323,7 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements LogoutState {
+abstract class Loading implements ApartmentSearchState {
   const factory Loading() = _$LoadingImpl;
 }
 
@@ -347,29 +333,29 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({ApartmentSearchResponse apartmentSearchResponse});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$ApartmentSearchStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? apartmentSearchResponse = null,
   }) {
     return _then(_$SuccessImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      apartmentSearchResponse: null == apartmentSearchResponse
+          ? _value.apartmentSearchResponse
+          : apartmentSearchResponse // ignore: cast_nullable_to_non_nullable
+              as ApartmentSearchResponse,
     ));
   }
 }
@@ -377,14 +363,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl({required this.message});
+  const _$SuccessImpl({required this.apartmentSearchResponse});
 
   @override
-  final String message;
+  final ApartmentSearchResponse apartmentSearchResponse;
 
   @override
   String toString() {
-    return 'LogoutState.success(message: $message)';
+    return 'ApartmentSearchState.success(apartmentSearchResponse: $apartmentSearchResponse)';
   }
 
   @override
@@ -392,13 +378,15 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(
+                    other.apartmentSearchResponse, apartmentSearchResponse) ||
+                other.apartmentSearchResponse == apartmentSearchResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, apartmentSearchResponse);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -411,11 +399,11 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(ApartmentSearchResponse apartmentSearchResponse)
+        success,
     required TResult Function(String error) error,
-    required TResult Function() formUpdated,
   }) {
-    return success(message);
+    return success(apartmentSearchResponse);
   }
 
   @override
@@ -423,11 +411,10 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
   }) {
-    return success?.call(message);
+    return success?.call(apartmentSearchResponse);
   }
 
   @override
@@ -435,13 +422,12 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult Function(String error)? error,
-    TResult Function()? formUpdated,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(message);
+      return success(apartmentSearchResponse);
     }
     return orElse();
   }
@@ -449,11 +435,10 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
   }) {
     return success(this);
   }
@@ -461,11 +446,10 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
   }) {
     return success?.call(this);
   }
@@ -473,11 +457,10 @@ class _$SuccessImpl implements Success {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(_Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -487,12 +470,14 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements LogoutState {
-  const factory Success({required final String message}) = _$SuccessImpl;
+abstract class Success implements ApartmentSearchState {
+  const factory Success(
+          {required final ApartmentSearchResponse apartmentSearchResponse}) =
+      _$SuccessImpl;
 
-  String get message;
+  ApartmentSearchResponse get apartmentSearchResponse;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -510,13 +495,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$ApartmentSearchStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -542,7 +527,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'LogoutState.error(error: $error)';
+    return 'ApartmentSearchState.error(error: $error)';
   }
 
   @override
@@ -556,7 +541,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -569,9 +554,9 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(ApartmentSearchResponse apartmentSearchResponse)
+        success,
     required TResult Function(String error) error,
-    required TResult Function() formUpdated,
   }) {
     return error(this.error);
   }
@@ -581,9 +566,8 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
   }) {
     return error?.call(this.error);
   }
@@ -593,9 +577,8 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(ApartmentSearchResponse apartmentSearchResponse)? success,
     TResult Function(String error)? error,
-    TResult Function()? formUpdated,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -607,11 +590,10 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
+    required TResult Function(_Initial value) initial,
     required TResult Function(Loading value) loading,
     required TResult Function(Success value) success,
     required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
   }) {
     return error(this);
   }
@@ -619,11 +601,10 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(Loading value)? loading,
     TResult? Function(Success value)? success,
     TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
   }) {
     return error?.call(this);
   }
@@ -631,11 +612,10 @@ class _$ErrorImpl implements Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
+    TResult Function(_Initial value)? initial,
     TResult Function(Loading value)? loading,
     TResult Function(Success value)? success,
     TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -645,137 +625,14 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements LogoutState {
+abstract class Error implements ApartmentSearchState {
   const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of ApartmentSearchState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$FormUpdatedImplCopyWith<$Res> {
-  factory _$$FormUpdatedImplCopyWith(
-          _$FormUpdatedImpl value, $Res Function(_$FormUpdatedImpl) then) =
-      __$$FormUpdatedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$FormUpdatedImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$FormUpdatedImpl>
-    implements _$$FormUpdatedImplCopyWith<$Res> {
-  __$$FormUpdatedImplCopyWithImpl(
-      _$FormUpdatedImpl _value, $Res Function(_$FormUpdatedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of LogoutState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$FormUpdatedImpl implements _FormUpdated {
-  const _$FormUpdatedImpl();
-
-  @override
-  String toString() {
-    return 'LogoutState.formUpdated()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FormUpdatedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(String message) success,
-    required TResult Function(String error) error,
-    required TResult Function() formUpdated,
-  }) {
-    return formUpdated();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(String message)? success,
-    TResult? Function(String error)? error,
-    TResult? Function()? formUpdated,
-  }) {
-    return formUpdated?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(String message)? success,
-    TResult Function(String error)? error,
-    TResult Function()? formUpdated,
-    required TResult orElse(),
-  }) {
-    if (formUpdated != null) {
-      return formUpdated();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(Loading value) loading,
-    required TResult Function(Success value) success,
-    required TResult Function(Error value) error,
-    required TResult Function(_FormUpdated value) formUpdated,
-  }) {
-    return formUpdated(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(Loading value)? loading,
-    TResult? Function(Success value)? success,
-    TResult? Function(Error value)? error,
-    TResult? Function(_FormUpdated value)? formUpdated,
-  }) {
-    return formUpdated?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(Loading value)? loading,
-    TResult Function(Success value)? success,
-    TResult Function(Error value)? error,
-    TResult Function(_FormUpdated value)? formUpdated,
-    required TResult orElse(),
-  }) {
-    if (formUpdated != null) {
-      return formUpdated(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FormUpdated implements LogoutState {
-  const factory _FormUpdated() = _$FormUpdatedImpl;
 }

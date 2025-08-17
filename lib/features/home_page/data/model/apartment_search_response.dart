@@ -10,6 +10,7 @@ class ApartmentSearchResponse {
   int? status;
 
   ApartmentSearchResponse({this.data, this.message, this.status});
+
   factory ApartmentSearchResponse.fromJson(Map<String, dynamic> json) =>  _$ApartmentSearchResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ApartmentSearchResponseToJson(this);
 
@@ -18,10 +19,12 @@ class ApartmentSearchResponse {
 @JsonSerializable()
 class Data {
   List<Chalets>? chalets;
+  @JsonKey(name:'search_results_count')
   int? searchResultsCount;
   Pagination? pagination;
 
   Data({this.chalets, this.searchResultsCount, this.pagination});
+
   factory Data.fromJson(Map<String, dynamic> json) =>  _$DataFromJson(json);
   Map<String, dynamic> toJson() => _$DataToJson(this);
 }
@@ -37,11 +40,16 @@ class Chalets {
   String? description;
   String? status;
   String? type;
+  @JsonKey(name:'is_cleaned')
   bool? isCleaned;
+  @JsonKey(name:'is_booked')
   bool? isBooked;
   String? image;
+  @JsonKey(name:'images_count')
   int? imagesCount;
+  @JsonKey(name:'created_at')
   String? createdAt;
+  @JsonKey(name:'updated_at')
   String? updatedAt;
 
   Chalets(
@@ -67,8 +75,11 @@ class Chalets {
 
 @JsonSerializable()
 class Pagination {
+  @JsonKey(name:'current_page')
   int? currentPage;
+  @JsonKey(name:'last_page')
   int? lastPage;
+  @JsonKey(name:'per_page')
   int? perPage;
   int? total;
   int? from;

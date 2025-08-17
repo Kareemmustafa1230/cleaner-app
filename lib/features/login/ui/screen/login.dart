@@ -150,7 +150,6 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
       return context.translate(LangKeys.pleaseEnterPhone);
     }
 
-    // التحقق من صحة رقم الهاتف (يمكن تعديله حسب البلد)
     final phoneRegex = RegExp(r'^[0-9]{10,15}$');
 
     if (!phoneRegex.hasMatch(value.trim())) {

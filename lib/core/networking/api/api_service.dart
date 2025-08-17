@@ -7,6 +7,7 @@ import '../../../features/home_page/data/model/apartment_search_response.dart';
 import '../../../features/login/data/model/login_response.dart';
 import '../../../features/notifications/data/model/notifications_response.dart';
 import '../../../features/notifications/data/model/unread_count_notifications_response.dart';
+import '../../../features/setting/data/model/change_password_request.dart';
 import '../constants/api_constants.dart';
 part 'api_service.g.dart';
 
@@ -26,10 +27,18 @@ abstract class ApiService {
       @Header('Accept') String accept,
       );
 
+  @PUT(ApiConstants.updatePassword)
+  Future<LogoutResponse> updatePassword(
+      @Body() ChangePasswordRequest changePasswordRequest,
+      @Header('Accept') String accept,
+      );
+
+
   @GET(ApiConstants.apartmentSearch)
   Future<ApartmentSearchResponse> apartmentSearch(
       @Query('page') String page,
       @Query('search') String search,
+      @Header('Accept') String accept,
       );
 
 

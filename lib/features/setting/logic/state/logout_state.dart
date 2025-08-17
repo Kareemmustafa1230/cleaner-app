@@ -7,4 +7,5 @@ class LogoutState with _$LogoutState {
   const factory LogoutState.loading() = Loading;
   const factory LogoutState.success({required String message}) = Success;
   const factory LogoutState.error({required String error}) = Error;
+
 } 
