@@ -4,6 +4,8 @@ class ApiConstants {
   static const String logout = "logout";
   static const String apartmentSearch = "chalets";
   static const String updatePassword = "password";
+  static const String updateProfile = "profile";
+  static const String inventory = "inventory";
 
   //static const String uploadImage = "driver/upload-image-before-register";
   static const String notifications = "/notifications";

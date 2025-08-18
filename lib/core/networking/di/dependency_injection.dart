@@ -13,6 +13,9 @@ import 'package:diyar/features/setting/logic/cubit/change_password_cubit.dart';
 import 'package:diyar/features/setting/logic/cubit/logout_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
+import '../../../features/setting/data/data_source/update_profile_data_source.dart';
+import '../../../features/setting/data/repo/update_profile_repo.dart';
+import '../../../features/setting/logic/cubit/update_profile_cubit.dart';
 import '../../app_cubit/app_cubit.dart';
 import '../../helpers/shared_pref_helper.dart';
 import '../api/api_factory.dart';
@@ -45,4 +48,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<ChangePasswordRepo>(() => ChangePasswordRepo(getIt()));
   getIt.registerFactory<ChangePasswordCubit>(() => ChangePasswordCubit(getIt()));
   getIt.registerLazySingleton<ChangePasswordDataSource>(() => ChangePasswordDataSource(getIt()));
+
+  //updateProfile
+  getIt.registerLazySingleton<UpdateProfileRepo>(() => UpdateProfileRepo(getIt()));
+  getIt.registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(getIt()));
+  getIt.registerLazySingleton<UpdateProfileDataSource>(() => UpdateProfileDataSource(getIt()));
 }

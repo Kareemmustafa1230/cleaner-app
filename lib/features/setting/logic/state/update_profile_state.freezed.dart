@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'logout_state.dart';
+part of 'update_profile_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,12 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$LogoutState {
+mixin _$UpdateProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(UpdateProfileResponse updateProfileResponse)
+        success,
     required TResult Function(String error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$LogoutState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult? Function(String error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ mixin _$LogoutState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) =>
@@ -69,23 +70,23 @@ mixin _$LogoutState {
 }
 
 /// @nodoc
-abstract class $LogoutStateCopyWith<$Res> {
-  factory $LogoutStateCopyWith(
-          LogoutState value, $Res Function(LogoutState) then) =
-      _$LogoutStateCopyWithImpl<$Res, LogoutState>;
+abstract class $UpdateProfileStateCopyWith<$Res> {
+  factory $UpdateProfileStateCopyWith(
+          UpdateProfileState value, $Res Function(UpdateProfileState) then) =
+      _$UpdateProfileStateCopyWithImpl<$Res, UpdateProfileState>;
 }
 
 /// @nodoc
-class _$LogoutStateCopyWithImpl<$Res, $Val extends LogoutState>
-    implements $LogoutStateCopyWith<$Res> {
-  _$LogoutStateCopyWithImpl(this._value, this._then);
+class _$UpdateProfileStateCopyWithImpl<$Res, $Val extends UpdateProfileState>
+    implements $UpdateProfileStateCopyWith<$Res> {
+  _$UpdateProfileStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -98,13 +99,13 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$UpdateProfileStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -115,7 +116,7 @@ class _$InitialImpl implements Initial {
 
   @override
   String toString() {
-    return 'LogoutState.initial()';
+    return 'UpdateProfileState.initial()';
   }
 
   @override
@@ -132,7 +133,8 @@ class _$InitialImpl implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(UpdateProfileResponse updateProfileResponse)
+        success,
     required TResult Function(String error) error,
   }) {
     return initial();
@@ -143,7 +145,7 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult? Function(String error)? error,
   }) {
     return initial?.call();
@@ -154,7 +156,7 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -202,7 +204,7 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements LogoutState {
+abstract class Initial implements UpdateProfileState {
   const factory Initial() = _$InitialImpl;
 }
 
@@ -215,13 +217,13 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$UpdateProfileStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -232,7 +234,7 @@ class _$LoadingImpl implements Loading {
 
   @override
   String toString() {
-    return 'LogoutState.loading()';
+    return 'UpdateProfileState.loading()';
   }
 
   @override
@@ -249,7 +251,8 @@ class _$LoadingImpl implements Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(UpdateProfileResponse updateProfileResponse)
+        success,
     required TResult Function(String error) error,
   }) {
     return loading();
@@ -260,7 +263,7 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult? Function(String error)? error,
   }) {
     return loading?.call();
@@ -271,7 +274,7 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -319,7 +322,7 @@ class _$LoadingImpl implements Loading {
   }
 }
 
-abstract class Loading implements LogoutState {
+abstract class Loading implements UpdateProfileState {
   const factory Loading() = _$LoadingImpl;
 }
 
@@ -329,29 +332,29 @@ abstract class _$$SuccessImplCopyWith<$Res> {
           _$SuccessImpl value, $Res Function(_$SuccessImpl) then) =
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({UpdateProfileResponse updateProfileResponse});
 }
 
 /// @nodoc
 class __$$SuccessImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$SuccessImpl>
+    extends _$UpdateProfileStateCopyWithImpl<$Res, _$SuccessImpl>
     implements _$$SuccessImplCopyWith<$Res> {
   __$$SuccessImplCopyWithImpl(
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? updateProfileResponse = null,
   }) {
     return _then(_$SuccessImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      updateProfileResponse: null == updateProfileResponse
+          ? _value.updateProfileResponse
+          : updateProfileResponse // ignore: cast_nullable_to_non_nullable
+              as UpdateProfileResponse,
     ));
   }
 }
@@ -359,14 +362,14 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl({required this.message});
+  const _$SuccessImpl({required this.updateProfileResponse});
 
   @override
-  final String message;
+  final UpdateProfileResponse updateProfileResponse;
 
   @override
   String toString() {
-    return 'LogoutState.success(message: $message)';
+    return 'UpdateProfileState.success(updateProfileResponse: $updateProfileResponse)';
   }
 
   @override
@@ -374,13 +377,14 @@ class _$SuccessImpl implements Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.updateProfileResponse, updateProfileResponse) ||
+                other.updateProfileResponse == updateProfileResponse));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, updateProfileResponse);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -393,10 +397,11 @@ class _$SuccessImpl implements Success {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(UpdateProfileResponse updateProfileResponse)
+        success,
     required TResult Function(String error) error,
   }) {
-    return success(message);
+    return success(updateProfileResponse);
   }
 
   @override
@@ -404,10 +409,10 @@ class _$SuccessImpl implements Success {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult? Function(String error)? error,
   }) {
-    return success?.call(message);
+    return success?.call(updateProfileResponse);
   }
 
   @override
@@ -415,12 +420,12 @@ class _$SuccessImpl implements Success {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(message);
+      return success(updateProfileResponse);
     }
     return orElse();
   }
@@ -463,12 +468,14 @@ class _$SuccessImpl implements Success {
   }
 }
 
-abstract class Success implements LogoutState {
-  const factory Success({required final String message}) = _$SuccessImpl;
+abstract class Success implements UpdateProfileState {
+  const factory Success(
+          {required final UpdateProfileResponse updateProfileResponse}) =
+      _$SuccessImpl;
 
-  String get message;
+  UpdateProfileResponse get updateProfileResponse;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -486,13 +493,13 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$LogoutStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$UpdateProfileStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -518,7 +525,7 @@ class _$ErrorImpl implements Error {
 
   @override
   String toString() {
-    return 'LogoutState.error(error: $error)';
+    return 'UpdateProfileState.error(error: $error)';
   }
 
   @override
@@ -532,7 +539,7 @@ class _$ErrorImpl implements Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -545,7 +552,8 @@ class _$ErrorImpl implements Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(String message) success,
+    required TResult Function(UpdateProfileResponse updateProfileResponse)
+        success,
     required TResult Function(String error) error,
   }) {
     return error(this.error);
@@ -556,7 +564,7 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(String message)? success,
+    TResult? Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult? Function(String error)? error,
   }) {
     return error?.call(this.error);
@@ -567,7 +575,7 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(String message)? success,
+    TResult Function(UpdateProfileResponse updateProfileResponse)? success,
     TResult Function(String error)? error,
     required TResult orElse(),
   }) {
@@ -615,12 +623,12 @@ class _$ErrorImpl implements Error {
   }
 }
 
-abstract class Error implements LogoutState {
+abstract class Error implements UpdateProfileState {
   const factory Error({required final String error}) = _$ErrorImpl;
 
   String get error;
 
-  /// Create a copy of LogoutState
+  /// Create a copy of UpdateProfileState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
