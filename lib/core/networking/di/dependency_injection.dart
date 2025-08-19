@@ -13,6 +13,9 @@ import 'package:diyar/features/setting/logic/cubit/change_password_cubit.dart';
 import 'package:diyar/features/setting/logic/cubit/logout_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
+import '../../../features/inventory/data/data_source/inventory_data_source.dart';
+import '../../../features/inventory/data/repo/inventory_repo.dart';
+import '../../../features/inventory/logic/cubit/inventory_cubit.dart';
 import '../../../features/setting/data/data_source/update_profile_data_source.dart';
 import '../../../features/setting/data/repo/update_profile_repo.dart';
 import '../../../features/setting/logic/cubit/update_profile_cubit.dart';
@@ -53,4 +56,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<UpdateProfileRepo>(() => UpdateProfileRepo(getIt()));
   getIt.registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(getIt()));
   getIt.registerLazySingleton<UpdateProfileDataSource>(() => UpdateProfileDataSource(getIt()));
+
+  //inventory
+  getIt.registerLazySingleton<InventoryRepo>(() => InventoryRepo(getIt()));
+  getIt.registerFactory<InventoryCubit>(() => InventoryCubit(getIt()));
+  getIt.registerLazySingleton<InventoryDataSource>(() => InventoryDataSource(getIt()));
 }

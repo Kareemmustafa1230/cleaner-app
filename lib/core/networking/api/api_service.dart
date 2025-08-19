@@ -52,6 +52,7 @@ abstract class ApiService {
 
   @GET(ApiConstants.inventory)
   Future<InventoryResponse> inventory(
+      @Query('page') String page,
       @Header('Accept') String accept,
       );
 

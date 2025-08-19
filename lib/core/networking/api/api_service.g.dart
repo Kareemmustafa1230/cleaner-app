@@ -213,9 +213,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<InventoryResponse> inventory(String accept) async {
+  Future<InventoryResponse> inventory(
+    String page,
+    String accept,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{r'Accept': accept};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
