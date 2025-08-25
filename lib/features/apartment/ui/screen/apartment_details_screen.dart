@@ -716,71 +716,20 @@ class _ApartmentDetailsScreenState extends State<ApartmentDetailsScreen> {
               ),
             ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // أيقونة الشقة
-              Icon(
-                Icons.apartment,
-                color: ColorApp.primaryBlue,
-                size: 18.sp,
-              ),
-              SizedBox(height: 4.h),
-              // عنوان الشقة
-              Text(
-                widget.apartmentName,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  color: ColorApp.textPrimary,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Cairo',
-                ),
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              // نوع الشقة
-              Text(
-                'شقة سكنية',
-                style: TextStyle(
-                  fontSize: 11.sp,
-                  color: ColorApp.textSecondary,
-                  fontWeight: FontWeight.w500,
-                  fontFamily: 'Cairo',
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+          child: Text(
+            widget.apartmentName,
+            style: TextStyle(
+              fontSize: 16.sp,
+              color: ColorApp.textPrimary,
+              fontWeight: FontWeight.w700,
+              fontFamily: 'Cairo',
+            ),
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
         centerTitle: true,
-        actions: [
-          // زر إضافي للمعلومات
-          Container(
-            margin: EdgeInsets.only(right: 8.w),
-            child: IconButton(
-              onPressed: () {
-                // يمكن إضافة إجراء هنا مثل عرض معلومات إضافية
-              },
-              icon: Container(
-                padding: EdgeInsets.all(8.w),
-                decoration: BoxDecoration(
-                  color: ColorApp.backgroundSecondary.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(10.r),
-                  border: Border.all(
-                    color: ColorApp.borderLight.withValues(alpha: 0.3),
-                    width: 1,
-                  ),
-                ),
-                child: Icon(
-                  Icons.info_outline,
-                  color: ColorApp.primaryBlue,
-                  size: 20.sp,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Column(
         children: [

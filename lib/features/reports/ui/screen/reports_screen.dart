@@ -11,6 +11,7 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/widget/anmiate_builder.dart';
 import '../../../home_page/logic/cubit/apartment_search_cubit.dart';
 import '../../../home_page/logic/state/apartment_search_state.dart';
+import '../../logic/cubit/upload_cleaning_cubit.dart';
 import 'unit_media_upload_screen.dart';
 
 class ApartmentsMediaScreen extends StatefulWidget {
@@ -392,9 +393,12 @@ class _ApartmentsMediaScreenState extends State<ApartmentsMediaScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => UnitMediaUploadScreen(
-                      selectedUnit: apartment.id.toString(),
+                    builder: (context) => BlocProvider(
+                      create: (context) => getIt<UploadCleaningCubit>(),
+                      child: UnitMediaUploadScreen(
+                       chaletsId: apartment.id.toString(),
                     ),
+                   ),
                   ),
                 );
               },

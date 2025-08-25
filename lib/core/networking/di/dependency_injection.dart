@@ -16,6 +16,9 @@ import 'package:get_it/get_it.dart';
 import '../../../features/inventory/data/data_source/inventory_data_source.dart';
 import '../../../features/inventory/data/repo/inventory_repo.dart';
 import '../../../features/inventory/logic/cubit/inventory_cubit.dart';
+import '../../../features/reports/data/data_source/upload_cleaning_data_source.dart';
+import '../../../features/reports/data/repo/upload_cleaning_repo.dart';
+import '../../../features/reports/logic/cubit/upload_cleaning_cubit.dart';
 import '../../../features/setting/data/data_source/update_profile_data_source.dart';
 import '../../../features/setting/data/repo/update_profile_repo.dart';
 import '../../../features/setting/logic/cubit/update_profile_cubit.dart';
@@ -61,4 +64,9 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton<InventoryRepo>(() => InventoryRepo(getIt()));
   getIt.registerFactory<InventoryCubit>(() => InventoryCubit(getIt()));
   getIt.registerLazySingleton<InventoryDataSource>(() => InventoryDataSource(getIt()));
+
+  //inventory
+  getIt.registerLazySingleton<UploadCleaningRepo>(() => UploadCleaningRepo(getIt()));
+  getIt.registerFactory<UploadCleaningCubit>(() => UploadCleaningCubit(getIt()));
+  getIt.registerLazySingleton<UploadCleaningDataSource>(() => UploadCleaningDataSource(getIt()));
 }

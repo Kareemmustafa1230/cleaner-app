@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../data/model/cleaning_inventory_item.dart';
 import '../../data/model/cleaning_record.dart';
 import '../../data/model/cleaning_service.dart';
@@ -20,4 +19,4 @@ class CleaningInventoryState with _$CleaningInventoryState {
   const factory CleaningInventoryState.recordLoaded(CleaningRecord record) = _RecordLoaded;
   const factory CleaningInventoryState.recordNotFound() = _RecordNotFound;
   const factory CleaningInventoryState.error(String message) = _Error;
-} 
+}

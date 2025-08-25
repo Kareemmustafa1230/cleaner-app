@@ -8,6 +8,7 @@ import '../../../features/inventory/data/model/inventory_response.dart';
 import '../../../features/login/data/model/login_response.dart';
 import '../../../features/notifications/data/model/notifications_response.dart';
 import '../../../features/notifications/data/model/unread_count_notifications_response.dart';
+import '../../../features/reports/data/model/upload_response.dart';
 import '../../../features/setting/data/model/change_password_request.dart';
 import '../../../features/setting/data/model/update_profile_response.dart';
 import '../constants/api_constants.dart';
@@ -23,6 +24,13 @@ abstract class ApiService {
     @Body() LoginRequestBody loginRequestBody,
     @Header('Accept') String accept,
     );
+
+  @POST(ApiConstants.uploadCleaning)
+  Future<UploadResponse> uploadCleaning(
+      @Body() FormData formData,
+      @Header('Accept') String accept,
+      );
+
 
   @POST(ApiConstants.logout)
   Future<LogoutResponse> logout(
@@ -56,7 +64,14 @@ abstract class ApiService {
       @Header('Accept') String accept,
       );
 
-
+  @GET(ApiConstants.chaletsInfo)
+  Future<InventoryResponse> chaletsInfo(
+      @Query('chalet_id') String chaletId,
+      @Query('cleaning_type') String cleaningType,
+      @Query('cleaning_date') String cleaningDate,
+      @Query('media_type') String mediaType,
+      @Header('Accept') String accept,
+      );
 
   @GET(ApiConstants.notifications)
   Future<NotificationsResponse> notifications(

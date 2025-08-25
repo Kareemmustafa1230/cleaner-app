@@ -139,9 +139,6 @@ class _$CleaningInventoryStateCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -158,9 +155,6 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -329,9 +323,6 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -503,8 +494,6 @@ class __$$ItemsLoadedImplCopyWithImpl<$Res>
       _$ItemsLoadedImpl _value, $Res Function(_$ItemsLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -550,9 +539,7 @@ class _$ItemsLoadedImpl implements _ItemsLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_items));
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ItemsLoadedImplCopyWith<_$ItemsLoadedImpl> get copyWith =>
@@ -692,10 +679,7 @@ abstract class _ItemsLoaded implements CleaningInventoryState {
       _$ItemsLoadedImpl;
 
   List<CleaningInventoryItem> get items;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ItemsLoadedImplCopyWith<_$ItemsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -717,8 +701,6 @@ class __$$ServiceLoadedImplCopyWithImpl<$Res>
       _$ServiceLoadedImpl _value, $Res Function(_$ServiceLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -757,9 +739,7 @@ class _$ServiceLoadedImpl implements _ServiceLoaded {
   @override
   int get hashCode => Object.hash(runtimeType, service);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ServiceLoadedImplCopyWith<_$ServiceLoadedImpl> get copyWith =>
@@ -899,10 +879,7 @@ abstract class _ServiceLoaded implements CleaningInventoryState {
       _$ServiceLoadedImpl;
 
   CleaningService get service;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ServiceLoadedImplCopyWith<_$ServiceLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -921,9 +898,6 @@ class __$$ServiceNotFoundImplCopyWithImpl<$Res>
   __$$ServiceNotFoundImplCopyWithImpl(
       _$ServiceNotFoundImpl _value, $Res Function(_$ServiceNotFoundImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1092,9 +1066,6 @@ class __$$SavingImplCopyWithImpl<$Res>
   __$$SavingImplCopyWithImpl(
       _$SavingImpl _value, $Res Function(_$SavingImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1266,8 +1237,6 @@ class __$$ServiceSavedImplCopyWithImpl<$Res>
       _$ServiceSavedImpl _value, $Res Function(_$ServiceSavedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1306,9 +1275,7 @@ class _$ServiceSavedImpl implements _ServiceSaved {
   @override
   int get hashCode => Object.hash(runtimeType, service);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ServiceSavedImplCopyWith<_$ServiceSavedImpl> get copyWith =>
@@ -1448,10 +1415,7 @@ abstract class _ServiceSaved implements CleaningInventoryState {
       _$ServiceSavedImpl;
 
   CleaningService get service;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ServiceSavedImplCopyWith<_$ServiceSavedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1473,8 +1437,6 @@ class __$$ServiceUpdatedImplCopyWithImpl<$Res>
       _$ServiceUpdatedImpl _value, $Res Function(_$ServiceUpdatedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1513,9 +1475,7 @@ class _$ServiceUpdatedImpl implements _ServiceUpdated {
   @override
   int get hashCode => Object.hash(runtimeType, service);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ServiceUpdatedImplCopyWith<_$ServiceUpdatedImpl> get copyWith =>
@@ -1656,10 +1616,7 @@ abstract class _ServiceUpdated implements CleaningInventoryState {
       _$ServiceUpdatedImpl;
 
   CleaningService get service;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ServiceUpdatedImplCopyWith<_$ServiceUpdatedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1681,8 +1638,6 @@ class __$$StatsLoadedImplCopyWithImpl<$Res>
       _$StatsLoadedImpl _value, $Res Function(_$StatsLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1727,9 +1682,7 @@ class _$StatsLoadedImpl implements _StatsLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_stats));
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$StatsLoadedImplCopyWith<_$StatsLoadedImpl> get copyWith =>
@@ -1869,10 +1822,7 @@ abstract class _StatsLoaded implements CleaningInventoryState {
       _$StatsLoadedImpl;
 
   Map<String, dynamic> get stats;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$StatsLoadedImplCopyWith<_$StatsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1894,8 +1844,6 @@ class __$$RecordsLoadedImplCopyWithImpl<$Res>
       _$RecordsLoadedImpl _value, $Res Function(_$RecordsLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1941,9 +1889,7 @@ class _$RecordsLoadedImpl implements _RecordsLoaded {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_records));
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RecordsLoadedImplCopyWith<_$RecordsLoadedImpl> get copyWith =>
@@ -2083,10 +2029,7 @@ abstract class _RecordsLoaded implements CleaningInventoryState {
       _$RecordsLoadedImpl;
 
   List<CleaningRecord> get records;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RecordsLoadedImplCopyWith<_$RecordsLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2108,8 +2051,6 @@ class __$$RecordLoadedImplCopyWithImpl<$Res>
       _$RecordLoadedImpl _value, $Res Function(_$RecordLoadedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2148,9 +2089,7 @@ class _$RecordLoadedImpl implements _RecordLoaded {
   @override
   int get hashCode => Object.hash(runtimeType, record);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$RecordLoadedImplCopyWith<_$RecordLoadedImpl> get copyWith =>
@@ -2289,10 +2228,7 @@ abstract class _RecordLoaded implements CleaningInventoryState {
   const factory _RecordLoaded(final CleaningRecord record) = _$RecordLoadedImpl;
 
   CleaningRecord get record;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$RecordLoadedImplCopyWith<_$RecordLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -2311,9 +2247,6 @@ class __$$RecordNotFoundImplCopyWithImpl<$Res>
   __$$RecordNotFoundImplCopyWithImpl(
       _$RecordNotFoundImpl _value, $Res Function(_$RecordNotFoundImpl) _then)
       : super(_value, _then);
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -2485,8 +2418,6 @@ class __$$ErrorImplCopyWithImpl<$Res>
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -2525,9 +2456,7 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -2666,10 +2595,7 @@ abstract class _Error implements CleaningInventoryState {
   const factory _Error(final String message) = _$ErrorImpl;
 
   String get message;
-
-  /// Create a copy of CleaningInventoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
