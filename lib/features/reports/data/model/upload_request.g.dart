@@ -38,12 +38,12 @@ Map<String, dynamic> _$UploadRequestToJson(UploadRequest instance) =>
 
 InventoryItem _$InventoryItemFromJson(Map<String, dynamic> json) =>
     InventoryItem(
-      id: (json['id'] as num).toInt(),
-      quantityUsed: (json['quantity_used'] as num).toInt(),
+      inventoryId: (json['inventory_id'] as num).toInt(),
+      quantity: (json['quantity'] as num).toInt(),
     );
 
 Map<String, dynamic> _$InventoryItemToJson(InventoryItem instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'quantity_used': instance.quantityUsed,
+      'inventory_id': instance.inventoryId,
+      'quantity': instance.quantity,
     };

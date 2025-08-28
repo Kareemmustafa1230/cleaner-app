@@ -5,6 +5,9 @@ import 'package:diyar/features/home_page/logic/cubit/apartment_search_cubit.dart
 import 'package:diyar/features/login/data/data_source/login_data_source.dart';
 import 'package:diyar/features/login/data/repo/login_repo.dart';
 import 'package:diyar/features/login/logic/cubit/login_cubit.dart';
+import 'package:diyar/features/reports/data/data_source/upload_damage_data_source.dart';
+import 'package:diyar/features/reports/data/repo/upload_damage_repo.dart';
+import 'package:diyar/features/reports/logic/cubit/upload_damage_cubit.dart';
 import 'package:diyar/features/setting/data/data_source/change_password_data_source.dart';
 import 'package:diyar/features/setting/data/data_source/logout_data_source.dart';
 import 'package:diyar/features/setting/data/repo/change_password_repo.dart';
@@ -65,8 +68,13 @@ Future<void> setupGetIt() async {
   getIt.registerFactory<InventoryCubit>(() => InventoryCubit(getIt()));
   getIt.registerLazySingleton<InventoryDataSource>(() => InventoryDataSource(getIt()));
 
-  //inventory
+  //UploadCleaning
   getIt.registerLazySingleton<UploadCleaningRepo>(() => UploadCleaningRepo(getIt()));
-  getIt.registerFactory<UploadCleaningCubit>(() => UploadCleaningCubit(getIt()));
+  getIt.registerLazySingleton<UploadCleaningCubit>(() => UploadCleaningCubit(getIt()));
   getIt.registerLazySingleton<UploadCleaningDataSource>(() => UploadCleaningDataSource(getIt()));
+
+  //UploadDamage
+  getIt.registerLazySingleton<UploadDamageRepo>(() => UploadDamageRepo(getIt()));
+  getIt.registerLazySingleton<UploadDamageCubit>(() => UploadDamageCubit(getIt()));
+  getIt.registerLazySingleton<UploadDamageDataSource>(() => UploadDamageDataSource(getIt()));
 }

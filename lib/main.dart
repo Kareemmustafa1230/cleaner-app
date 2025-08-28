@@ -1,5 +1,4 @@
 import 'package:diyar/features/home_page/data/model/apartment_search.dart';
-import 'package:diyar/features/home_page/data/model/apartment_search_response.dart';
 import 'package:diyar/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';

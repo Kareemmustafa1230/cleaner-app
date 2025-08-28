@@ -109,6 +109,10 @@ class InventoryCubit extends Cubit<InventoryState> {
     response.when(
       success: (inventoryResponse) async {
         final newItems = inventoryResponse.data.inventory;
+        print('API returned ${newItems.length} inventory items');
+        for (var item in newItems) {
+          print('API Item: id=${item.id}, name=${item.name}, price=${item.price}, quantity=${item.quantity}');
+        }
 
         _inventoryItems.addAll(newItems);
 
@@ -118,6 +122,7 @@ class InventoryCubit extends Cubit<InventoryState> {
         emit(InventoryState.success(inventoryResponse: inventoryResponse));
       },
       failure: (error) {
+        print('API Error: ${error.apiErrorModel.message}');
         emit(InventoryState.error(error: error.apiErrorModel.message));
       },
     );

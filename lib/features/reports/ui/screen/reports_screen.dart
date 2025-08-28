@@ -11,8 +11,9 @@ import '../../../../core/helpers/extensions.dart';
 import '../../../../core/widget/anmiate_builder.dart';
 import '../../../home_page/logic/cubit/apartment_search_cubit.dart';
 import '../../../home_page/logic/state/apartment_search_state.dart';
-import '../../logic/cubit/upload_cleaning_cubit.dart';
 import 'unit_media_upload_screen.dart';
+import '../../../inventory/logic/cubit/inventory_cubit.dart';
+import '../../../inventory/data/model/inventory_response.dart';
 
 class ApartmentsMediaScreen extends StatefulWidget {
   const ApartmentsMediaScreen({super.key});
@@ -25,12 +26,29 @@ class _ApartmentsMediaScreenState extends State<ApartmentsMediaScreen> {
   final _scrollController = ScrollController();
   Timer? _searchTimer;
   late final ApartmentSearchCubit _cubit;
+  late final InventoryCubit _inventoryCubit;
+  List<InventoryItem> _inventoryItems = [];
 
   @override
   void initState() {
     super.initState();
     _cubit = getIt<ApartmentSearchCubit>()..fetchFirstPage();
+    _inventoryCubit = getIt<InventoryCubit>();
     _scrollController.addListener(_onScroll);
+    _loadInventory();
+  }
+
+  Future<void> _loadInventory() async {
+    try {
+      await _inventoryCubit.fetchFirstPage();
+      _inventoryItems = List<InventoryItem>.from(_inventoryCubit.inventoryItems);
+      print('Loaded ${_inventoryItems.length} inventory items in ApartmentsMediaScreen');
+      for (var item in _inventoryItems) {
+        print('Item: id=${item.id}, name=${item.name}, price=${item.price}, quantity=${item.quantity}');
+      }
+    } catch (e) {
+      print('Error loading inventory: $e');
+    }
   }
 
   void _onScroll() {
@@ -65,6 +83,7 @@ class _ApartmentsMediaScreenState extends State<ApartmentsMediaScreen> {
       ..dispose();
     _cubit.searchController.removeListener(_onSearchChanged);
     _cubit.close();
+    _inventoryCubit.close();
     super.dispose();
   }
 
@@ -393,12 +412,10 @@ class _ApartmentsMediaScreenState extends State<ApartmentsMediaScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BlocProvider(
-                      create: (context) => getIt<UploadCleaningCubit>(),
-                      child: UnitMediaUploadScreen(
-                       chaletsId: apartment.id.toString(),
+                    builder: (context) => UnitMediaUploadScreen(
+                      chaletsId: apartment.id.toString(),
+                      inventoryItems: _inventoryItems,
                     ),
-                   ),
                   ),
                 );
               },

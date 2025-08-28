@@ -98,6 +98,12 @@
   "building": "المبنى",
   "apartmentNumber": "شقة",
   "reports": "التقارير",
+  "uploading": "جاري الرفع...",
+  "pleaseWait": "يرجى الانتظار...",
+  "uploadSuccess": "تم الرفع بنجاح",
+  "uploadError": "حدث خطأ في الرفع",
+  "cleaningUpload": "جاري رفع تقرير النظافة...",
+  "damageUpload": "جاري رفع تقرير التلفيات...",
   "searchReports": "البحث في التقارير...",
   "availableReports": "التقارير المتاحة",
   "reportCount": "تقرير",
@@ -280,5 +286,10 @@
   "deleteAccountTitle": "حذف الحساب",
   "deleteAccountMessage": "هل أنت متأكد من حذف حسابك نهائياً؟",
   "deleteAccountWarning": "تحذير: هذا الإجراء نهائي ولا يمكن التراجع عنه!",
-  "confirm": "تأكيد"
+  "confirm": "تأكيد",
+  "pleaseEnterValidPrice": "يرجى إدخال سعر صحيح",
+  "noInventoryItems": "لا توجد عناصر مخزون متاحة",
+  "uploadImages": "رفع الصور",
+  "uploadVideos": "رفع الفيديوهات",
+  "cleaningTypeRequired": "نوع النظافة مطلوب"
 }

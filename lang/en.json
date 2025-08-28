@@ -98,6 +98,12 @@
   "building": "Building",
   "apartmentNumber": "Apartment",
   "reports": "Reports",
+  "uploading": "Uploading...",
+  "pleaseWait": "Please wait...",
+  "uploadSuccess": "Upload successful",
+  "uploadError": "Upload error occurred",
+  "cleaningUpload": "Uploading cleaning report...",
+  "damageUpload": "Uploading damage report...",
   "searchReports": "Search reports...",
   "availableReports": "Available Reports",
   "reportCount": "report",
@@ -280,5 +286,10 @@
   "deleteAccountTitle": "Delete Account",
   "deleteAccountMessage": "Are you sure you want to permanently delete your account?",
   "deleteAccountWarning": "Warning: This action is final and cannot be undone!",
-  "confirm": "Confirm"
+  "confirm": "Confirm",
+  "pleaseEnterValidPrice": "Please enter a valid price",
+  "noInventoryItems": "No inventory items available",
+  "uploadImages": "Upload Images",
+  "uploadVideos": "Upload Videos",
+  "cleaningTypeRequired": "Cleaning type is required"
 }

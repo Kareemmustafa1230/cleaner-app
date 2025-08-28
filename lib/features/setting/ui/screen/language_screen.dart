@@ -68,8 +68,7 @@ class _LanguageScreenState extends State<LanguageScreen> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final localizations = AppLocalizations.of(context);
-    
+
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       body: CustomScrollView(

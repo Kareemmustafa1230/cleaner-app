@@ -52,13 +52,14 @@ class UploadRequest {
 
 @JsonSerializable()
 class InventoryItem {
-  final int id;
-  @JsonKey(name: 'quantity_used')
-  final int quantityUsed;
+  @JsonKey(name: 'inventory_id')
+  final int inventoryId;
+  @JsonKey(name: 'quantity')
+  final int quantity;
 
   InventoryItem({
-    required this.id,
-    required this.quantityUsed,
+    required this.inventoryId,
+    required this.quantity,
   });
 
   factory InventoryItem.fromJson(Map<String, dynamic> json) =>

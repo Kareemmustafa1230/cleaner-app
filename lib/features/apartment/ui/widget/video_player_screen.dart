@@ -32,7 +32,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   bool _isDownloading = false;
   double _downloadProgress = 0.0;
   double _playbackSpeed = 1.0;
-  bool _showControls = true;
 
   // قائمة سرعات التشغيل المتاحة
   final List<double> _availableSpeeds = [0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 2.0];

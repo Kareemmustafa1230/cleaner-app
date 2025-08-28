@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart'; // عشان ننسق التاريخ
+import 'package:intl/intl.dart';
 import '../../data/model/upload_request.dart';
 import '../../data/repo/upload_cleaning_repo.dart';
 import '../state/upload_state.dart';
@@ -25,6 +25,9 @@ class UploadCleaningCubit extends Cubit<UploadState> {
   // Inventory Items
   List<InventoryItem> inventoryItems = [];
 
+  // متغير لتتبع حالة الرفع
+  bool _isUploading = false;
+
   /// اختيار صورة
   void addImage(XFile image) {
     selectedImages.add(image);
@@ -43,7 +46,24 @@ class UploadCleaningCubit extends Cubit<UploadState> {
     emit(const UploadState.inventoryUpdated());
   }
 
-  Future<void> emitUpdateProfileState() async {
+
+  /// إعادة تعيين الحالة إلى الحالة الأولية
+  void resetState() {
+    if (isClosed) return;
+    _isUploading = false;
+    emit(const UploadState.initial());
+  }
+
+  Future<void> emitUpdateCleaningState() async {
+    if (isClosed) return; // فحص إذا كان الـ cubit مغلق
+    
+    // فحص إذا كان الرفع جارٍ بالفعل
+    if (_isUploading) {
+      print('UploadCleaningCubit: Already uploading, skipping...');
+      return;
+    }
+    
+    _isUploading = true;
     emit(const UploadState.loading());
 
     try {
@@ -69,8 +89,12 @@ class UploadCleaningCubit extends Cubit<UploadState> {
       final updateProfileResponse =
       await _uploadCleaningRepo.uploadCleaning(uploadRequest);
 
+      if (isClosed) return; // فحص مرة أخرى بعد الـ API call
+
       await updateProfileResponse.when(
         success: (response) async {
+          if (isClosed) return; // فحص قبل إرسال الحالة النهائية
+          _isUploading = false;
           if (cleaningTimeController.text == "before") {
             emit(UploadState.successWithoutInventory(
                 message: response.message ?? "تم الحفظ بدون مخزون"));
@@ -80,11 +104,15 @@ class UploadCleaningCubit extends Cubit<UploadState> {
           }
         },
         failure: (error) {
+          if (isClosed) return; // فحص قبل إرسال حالة الخطأ
+          _isUploading = false;
           emit(UploadState.error(
-              error: error.apiErrorModel.message ?? 'حدث خطأ غير معروف'));
+              error: error.apiErrorModel.message));
         },
       );
     } catch (e) {
+      if (isClosed) return; // فحص قبل إرسال حالة الخطأ
+      _isUploading = false;
       emit(UploadState.error(error: e.toString()));
     }
   }

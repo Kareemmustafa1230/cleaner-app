@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/theme/text_style/text_style.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../core/helpers/extensions.dart';
-import '../../../../core/widget/image_picker.dart';
+import '../../../../core/widget/loading_dialog.dart';
 
 class UploadScreen extends StatefulWidget {
   const UploadScreen({super.key});
@@ -21,7 +20,6 @@ class _UploadScreenState extends State<UploadScreen> {
   String _selectedMediaType = 'cleanliness';
   List<String> _selectedImages = [];
   List<String> _selectedVideos = [];
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -263,23 +261,12 @@ class _UploadScreenState extends State<UploadScreen> {
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(15.r),
-                    onTap: _isLoading ? null : _handleUpload,
+                    onTap: _handleUpload,
                     child: Center(
-                      child: _isLoading
-                          ? SizedBox(
-                              height: 24.h,
-                              width: 24.w,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2.w,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).colorScheme.onPrimary,
-                                ),
-                              ),
-                            )
-                          : Text(
-                              localizations?.translate('upload') ?? 'رفع المحتوى',
-                              style: TextStyleApp.font16whiteFFWeight700,
-                            ),
+                      child: Text(
+                        localizations?.translate('upload') ?? 'رفع المحتوى',
+                        style: TextStyleApp.font16whiteFFWeight700,
+                      ),
                     ),
                   ),
                 ),
@@ -570,24 +557,25 @@ class _UploadScreenState extends State<UploadScreen> {
         return;
       }
 
-      setState(() {
-        _isLoading = true;
-      });
+      // إظهار مكون التحميل
+      LoadingDialog.show(
+        context,
+        message: context.translate('uploading'),
+      );
 
-              // محاكاة عملية الرفع
-        Future.delayed(const Duration(seconds: 2), () {
-          setState(() {
-            _isLoading = false;
-          });
-          
-          final localizations = AppLocalizations.of(context);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(localizations?.translate('uploadSuccessfully') ?? 'تم رفع المحتوى بنجاح'),
-              backgroundColor: Theme.of(context).colorScheme.primary,
-            ),
-          );
-        });
+      // محاكاة عملية الرفع
+      Future.delayed(const Duration(seconds: 2), () {
+        // إخفاء مكون التحميل
+        LoadingDialog.hide(context);
+        
+        final localizations = AppLocalizations.of(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(localizations?.translate('uploadSuccessfully') ?? 'تم رفع المحتوى بنجاح'),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+        );
+      });
     }
   }
 } 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/theme/text_style/text_style.dart';
-import '../../../../core/language/app_localizations.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/helpers/extensions.dart';
 

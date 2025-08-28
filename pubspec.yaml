@@ -81,7 +81,6 @@ dependencies:
   permission_handler: ^11.3.0
   animated_text_kit: ^4.2.2
   font_awesome_flutter: ^10.1.0
-  pinput: ^5.0.0
   carousel_slider: ^5.0.0
   video_player: ^2.9.2
   chewie: ^1.8.5
@@ -107,6 +106,7 @@ dependencies:
   firebase_messaging: ^15.2.9
   google_sign_in: ^6.2.0
   hive_flutter: ^1.1.0
+  http_parser: ^4.0.2
 
   # image_gallery_saver: ^2.0.3  # تم إزالتها بسبب مشاكل التوافق
   # The following adds the Cupertino Icons font to your application.

@@ -8,6 +8,7 @@ class ApiConstants {
   static const String inventory = "inventory";
   static const String chaletsInfo = "chalets/info";
   static const String uploadCleaning = "cleaning/upload";
+  static const String uploadDamage = "damages/upload";
 
 
 

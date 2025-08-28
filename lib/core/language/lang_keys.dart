@@ -314,5 +314,12 @@ class LangKeys {
   static const String deleteAccountMessage = 'deleteAccountMessage';
   static const String deleteAccountWarning = 'deleteAccountWarning';
   static const String confirm = 'confirm';
+  
+  // مفاتيح إضافية للتابات
+  static const String pleaseEnterValidPrice = 'pleaseEnterValidPrice';
+  static const String noInventoryItems = 'noInventoryItems';
+  static const String uploadImages = 'uploadImages';
+  static const String uploadVideos = 'uploadVideos';
+  static const String cleaningTypeRequired = 'cleaningTypeRequired';
 }
 

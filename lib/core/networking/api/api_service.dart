@@ -32,6 +32,14 @@ abstract class ApiService {
       );
 
 
+  @POST(ApiConstants.uploadDamage)
+  Future<UploadResponse> uploadDamage(
+      @Body() FormData formData,
+      @Header('Accept') String accept,
+      );
+
+
+
   @POST(ApiConstants.logout)
   Future<LogoutResponse> logout(
       @Header('Accept') String accept,
@@ -48,7 +56,6 @@ abstract class ApiService {
   Future<UpdateProfileResponse> updateProfile(
       @Body() FormData formData,
       @Header('Accept') String accept,
-
   );
 
   @GET(ApiConstants.apartmentSearch)

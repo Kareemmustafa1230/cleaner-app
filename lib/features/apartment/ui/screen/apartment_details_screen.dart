@@ -559,20 +559,6 @@ class _ApartmentDetailsScreenState extends State<ApartmentDetailsScreen> {
     }
   }
 
-  // الحصول على لون الأولوية
-  Color _getPriorityColor(String priority) {
-    switch (priority) {
-      case 'عالي':
-        return ColorApp.priorityHigh;
-      case 'متوسط':
-        return ColorApp.priorityMedium;
-      case 'منخفض':
-        return ColorApp.priorityLow;
-      default:
-        return ColorApp.grey;
-    }
-  }
-
   // عرض معرض الصور
   void _showImageGallery(BuildContext context, int initialIndex) {
     Navigator.push(
@@ -609,21 +595,6 @@ class _ApartmentDetailsScreenState extends State<ApartmentDetailsScreen> {
           );
         },
         transitionDuration: Duration(milliseconds: 300),
-      ),
-    );
-  }
-
-  // عرض مشغل الفيديو
-  void _showVideoPlayer(BuildContext context, Map<String, dynamic> video) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => VideoPlayerScreen(
-          videoUrl: video['url'],
-          videoTitle: video['title'],
-          videoType: video['type'],
-          videoDuration: video['duration'],
-        ),
       ),
     );
   }

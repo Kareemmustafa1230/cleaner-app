@@ -108,7 +108,7 @@ class UpdateProfileCubit extends Cubit<UpdateProfileState> {
           emit(UpdateProfileState.success(updateProfileResponse: response));
         },
         failure: (error) {
-          emit(UpdateProfileState.error(error: error.apiErrorModel.message ?? 'حدث خطأ غير معروف'));
+          emit(UpdateProfileState.error(error: error.apiErrorModel.message));
         },
       );
     } catch (e) {

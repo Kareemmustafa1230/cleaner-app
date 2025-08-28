@@ -1,54 +1,31 @@
 import 'package:dio/dio.dart';
-import 'dart:convert';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:diyar/core/networking/api/api_service.dart';
 import '../../../../core/error/api_error_handler.dart';
-import '../model/upload_request.dart';
+import '../model/upload_damages_request.dart';
 import '../model/upload_response.dart';
 
-class UploadCleaningDataSource {
+class UploadDamageDataSource {
   final ApiService _apiService;
 
-  UploadCleaningDataSource(this._apiService);
+  UploadDamageDataSource(this._apiService);
 
-  Future<UploadResponse> uploadCleaning(UploadRequest uploadRequest) async {
+  Future<UploadResponse> uploadDamage(UploadDamagesRequest uploadDamagesRequest) async {
     try {
       final formData = FormData();
 
       // الحقول الأساسية
       formData.fields.addAll([
-        MapEntry("cleaning_type", uploadRequest.cleaningType),
-        MapEntry("chalet_id", uploadRequest.chaletId),
-        MapEntry("cleaning_time", uploadRequest.cleaningTime),
-        MapEntry("date", uploadRequest.date),
+        MapEntry("description", uploadDamagesRequest.description),
+        MapEntry("chalet_id", uploadDamagesRequest.chaletId),
+        MapEntry("price", uploadDamagesRequest.price),
       ]);
 
-      // لو cleaning_time = after أبعت cost و inventory
-      if (uploadRequest.cleaningTime == "after") {
-        if (uploadRequest.cleaningCost != null) {
-          formData.fields.add(
-            MapEntry("cleaning_cost", uploadRequest.cleaningCost!),
-          );
-        }
-
-        if (uploadRequest.inventoryItems != null &&
-            uploadRequest.inventoryItems!.isNotEmpty) {
-          final inventoryList = uploadRequest.inventoryItems!
-              .map((e) => {
-                    'inventory_id': e.inventoryId,
-                    'quantity': e.quantity,
-                  })
-              .toList();
-          final inventoryJson = jsonEncode(inventoryList);
-          print('Sending inventory items: $inventoryJson');
-          formData.fields.add(MapEntry('inventory_items', inventoryJson));
-        }
-      }
 
       // الصور
-      if (uploadRequest.images != null && uploadRequest.images!.isNotEmpty) {
-        for (final img in uploadRequest.images!) {
+      if (uploadDamagesRequest.images != null && uploadDamagesRequest.images!.isNotEmpty) {
+        for (final img in uploadDamagesRequest.images!) {
           formData.files.add(
             MapEntry(
               "images[]",
@@ -59,8 +36,8 @@ class UploadCleaningDataSource {
       }
 
       // الفيديوهات: رفع مباشر أو بالشانك حسب الحجم
-      if (uploadRequest.videos != null && uploadRequest.videos!.isNotEmpty) {
-        for (final vidPath in uploadRequest.videos!) {
+      if (uploadDamagesRequest.videos != null && uploadDamagesRequest.videos!.isNotEmpty) {
+        for (final vidPath in uploadDamagesRequest.videos!) {
           final file = File(vidPath);
           final fileSize = await file.length();
           // 8MB chunk size بشكل افتراضي
@@ -81,7 +58,7 @@ class UploadCleaningDataSource {
         }
       }
 
-      final response = await _apiService.uploadCleaning(
+      final response = await _apiService.uploadDamage(
         formData,
         'multipart/form-data',
       );
@@ -141,7 +118,7 @@ class UploadCleaningDataSource {
         );
 
         // ارفع الشانك
-        await _apiService.uploadCleaning(
+        await _apiService.uploadDamage(
           chunkForm,
           'multipart/form-data',
         );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../theme/Color/colors.dart';
 import '../theme/text_style/text_style.dart';
 
 void showErrorSnackBar({

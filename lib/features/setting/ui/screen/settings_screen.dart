@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/Color/colors.dart';
 import '../../../../core/helpers/extensions.dart';
@@ -8,7 +7,6 @@ import '../../../../core/language/lang_keys.dart';
 import '../../../../core/app_cubit/app_cubit.dart';
 import '../../../../core/theme/text_style/text_style.dart';
 import '../../../../core/networking/di/dependency_injection.dart';
-import '../../../login/ui/screen/login.dart';
 import '../../logic/cubit/logout_cubit.dart';
 import '../../logic/state/logout_state.dart';
 import 'profile_screen.dart';
@@ -27,7 +25,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
   bool _biometricEnabled = false;
-  bool _autoBackupEnabled = true;
 
   @override
   Widget build(BuildContext context) {
