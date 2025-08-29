@@ -29,17 +29,8 @@ class LoadingOverlay extends StatelessWidget {
               children: [
                 Lottie.asset(
                   "assets/lottie/loading.json",
-                  height: 150.h,
+                  height: 200.h,
                   animate: true,
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  text ?? 'جاري التحميل ...',
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                    color: const Color(0xFF1A1A1A),
-                  ),
                 ),
               ],
             ),

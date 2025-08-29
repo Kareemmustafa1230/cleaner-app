@@ -321,5 +321,75 @@ class LangKeys {
   static const String uploadImages = 'uploadImages';
   static const String uploadVideos = 'uploadVideos';
   static const String cleaningTypeRequired = 'cleaningTypeRequired';
+  
+  // مفاتيح رسائل الرفع
+  static const String uploadSuccessWithoutInventoryMessage = 'uploadSuccessWithoutInventoryMessage';
+  static const String uploadDamageSuccessMessage = 'uploadDamageSuccessMessage';
+  
+  // مفاتيح إضافية للإعدادات
+  static const String camera = 'camera';
+  static const String gallery = 'gallery';
+  static const String privacyPolicyConsentSaved = 'privacyPolicyConsentSaved';
+  
+  // مفاتيح المخزون
+  static const String loadMoreError = 'loadMoreError';
+  static const String tryAgain = 'tryAgain';
+  
+  // مفاتيح معرض الفيديوهات
+  static const String loadingVideo = 'loadingVideo';
+  static const String videoCounter = 'videoCounter';
+  
+  // مفاتيح التحقق من الرفع
+  static const String imagesRequired = 'imagesRequired';
+  static const String videosRequired = 'videosRequired';
+  static const String mediaRequired = 'mediaRequired';
+  
+  // مفاتيح صفحة حول التطبيق
+  static const String aboutAppTitle = 'aboutAppTitle';
+  static const String appDescription = 'appDescription';
+  static const String appVersion = 'appVersion';
+  static const String developerInfo = 'developerInfo';
+  static const String developerName = 'developerName';
+  static const String developerTitle = 'developerTitle';
+  static const String developerDescription = 'developerDescription';
+  static const String contactDeveloper = 'contactDeveloper';
+  static const String emailContact = 'emailContact';
+  static const String phoneContact = 'phoneContact';
+  static const String locationContact = 'locationContact';
+  static const String githubContact = 'githubContact';
+  static const String appStatistics = 'appStatistics';
+  static const String downloads = 'downloads';
+  static const String rating = 'rating';
+  static const String lastUpdate = 'lastUpdate';
+  static const String copyright = 'copyright';
+  static const String developedWithLove = 'developedWithLove';
+  static const String appFeatures = 'appFeatures';
+  static const String cleaningManagement = 'cleaningManagement';
+  static const String maintenanceManagement = 'maintenanceManagement';
+  static const String pestControlManagement = 'pestControlManagement';
+  static const String reportsAndStatistics = 'reportsAndStatistics';
+  static const String technologiesUsed = 'technologiesUsed';
+  static const String frontend = 'frontend';
+  static const String backend = 'backend';
+  static const String design = 'design';
+  static const String securityAndPrivacy = 'securityAndPrivacy';
+  static const String supportedLanguages = 'supportedLanguages';
+  static const String systemRequirements = 'systemRequirements';
+  static const String installation = 'installation';
+  
+  // مفاتيح مشاريع GitHub
+  static const String githubProjects = 'githubProjects';
+  static const String repositories = 'repositories';
+  static const String followers = 'followers';
+  static const String stars = 'stars';
+  static const String sellCropApp = 'sellCropApp';
+  static const String sellCropDesc = 'sellCropDesc';
+  static const String fatraApp = 'fatraApp';
+  static const String fatraDesc = 'fatraDesc';
+  static const String driverApp = 'driverApp';
+  static const String driverDesc = 'driverDesc';
+  static const String unizoneApp = 'unizoneApp';
+  static const String unizoneDesc = 'unizoneDesc';
+  static const String viewAllProjects = 'viewAllProjects';
 }
 

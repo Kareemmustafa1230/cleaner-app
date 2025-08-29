@@ -80,6 +80,17 @@ class UploadPestMaintenanceCubit extends Cubit<UploadState> {
       print('UploadPestMaintenanceCubit: Already uploading, skipping...');
       return;
     }
+    
+    // التحقق من وجود صور وفيديوهات
+    if (selectedImages.isEmpty) {
+      emit(UploadState.error(error: 'imagesRequired'));
+      return;
+    }
+    
+    if (selectedVideos.isEmpty) {
+      emit(UploadState.error(error: 'videosRequired'));
+      return;
+    }
 
     _isUploading = true;
     emit(const UploadState.loading());
@@ -110,10 +121,10 @@ class UploadPestMaintenanceCubit extends Cubit<UploadState> {
 
           if (cleaningTimeController.text == "before") {
             emit(UploadState.successWithoutInventory(
-                message: response.message ?? "تم الحفظ بدون سعر"));
+                message: response.message ?? "uploadSuccessWithoutInventoryMessage"));
           } else {
             emit(UploadState.success(
-                message: response.message ?? "تم الحفظ بنجاح"));
+                message: response.message ?? "uploadSuccessMessage"));
           }
         },
         failure: (error) {

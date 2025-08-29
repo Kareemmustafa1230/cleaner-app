@@ -76,6 +76,17 @@ class UploadDamageCubit extends Cubit<UploadState> {
       return;
     }
     
+    // التحقق من وجود صور وفيديوهات
+    if (selectedImages.isEmpty) {
+      emit(UploadState.error(error: 'imagesRequired'));
+      return;
+    }
+    
+    if (selectedVideos.isEmpty) {
+      emit(UploadState.error(error: 'videosRequired'));
+      return;
+    }
+    
     _isUploading = true;
     emit(const UploadState.loading());
 
@@ -101,7 +112,7 @@ class UploadDamageCubit extends Cubit<UploadState> {
           if (isClosed) return; // فحص قبل إرسال الحالة النهائية
           _isUploading = false;
           emit(UploadState.success(
-              message: res.message ?? "تم حفظ البلاغ بنجاح"));
+              message: res.message ?? "uploadDamageSuccessMessage"));
         },
         failure: (error) {
           if (isClosed) return; // فحص قبل إرسال حالة الخطأ

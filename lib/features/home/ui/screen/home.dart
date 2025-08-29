@@ -2,10 +2,13 @@ import 'package:diyar/core/theme/Color/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:diyar/core/networking/di/dependency_injection.dart';
 import '../../../home_page/ui/screen/home_screen.dart';
 import '../../../setting/ui/screen/settings_screen.dart';
 import '../../../reports/ui/screen/reports_screen.dart';
 import '../../../inventory/ui/screen/inventory_screen.dart';
+import '../../../inventory/logic/cubit/inventory_cubit.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -21,7 +24,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   final List<Widget> _pages = [
     const HomePage(),
     const ApartmentsMediaScreen(),
-    const InventoryScreen(),
+    BlocProvider<InventoryCubit>(
+      create: (context) => getIt<InventoryCubit>(),
+      child: const InventoryScreen(),
+    ),
     const SettingsScreen(),
   ];
 

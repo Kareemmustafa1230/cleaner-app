@@ -1,7 +1,9 @@
+import 'package:diyar/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
+import '../../../../core/language/lang_keys.dart';
 import '../../../../core/theme/Color/colors.dart';
 
 class VideoGalleryScreen extends StatefulWidget {
@@ -21,8 +23,8 @@ class VideoGalleryScreen extends StatefulWidget {
 class _VideoGalleryScreenState extends State<VideoGalleryScreen> {
   late PageController _pageController;
   late int _currentIndex;
-  Map<int, VideoPlayerController> _videoControllers = {};
-  Map<int, ChewieController> _chewieControllers = {};
+  late final Map<int, VideoPlayerController> _videoControllers;
+  late final Map<int, ChewieController> _chewieControllers;
 
   @override
   void initState() {
@@ -33,6 +35,9 @@ class _VideoGalleryScreenState extends State<VideoGalleryScreen> {
   }
 
   void _initializeVideoControllers() {
+    _videoControllers = {};
+    _chewieControllers = {};
+    
     for (int i = 0; i < widget.videos.length; i++) {
       _videoControllers[i] = VideoPlayerController.asset(widget.videos[i]['url']);
       _chewieControllers[i] = ChewieController(
@@ -56,7 +61,7 @@ class _VideoGalleryScreenState extends State<VideoGalleryScreen> {
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  'جاري تحميل الفيديو...',
+                  context.translate(LangKeys.loadingVideo),
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.sp,
@@ -129,7 +134,7 @@ class _VideoGalleryScreenState extends State<VideoGalleryScreen> {
           ),
         ),
         title: Text(
-          '${_currentIndex + 1} من ${widget.videos.length}',
+          '${_currentIndex + 1} ${context.translate(LangKeys.videoCounter)} ${widget.videos.length}',
           style: TextStyle(
             fontSize: 16.sp,
             color: Colors.white,

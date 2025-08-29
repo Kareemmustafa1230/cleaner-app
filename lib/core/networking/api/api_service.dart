@@ -56,7 +56,7 @@ abstract class ApiService {
       @Header('Accept') String accept,
       );
 
-  @PUT(ApiConstants.updateProfile)
+  @POST(ApiConstants.updateProfile)
   @MultiPart()
   Future<UpdateProfileResponse> updateProfile(
       @Body() FormData formData,

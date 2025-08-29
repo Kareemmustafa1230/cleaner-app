@@ -211,7 +211,7 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
                           ),
                           Tab(
                             icon: Icon(Icons.bug_report, size: 20.sp),
-                            text: "المبيدات",
+                            text: context.translate(LangKeys.pestControlMedia),
                           ),
                         ],
                       ),
@@ -439,8 +439,21 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
         break;
     }
 
+    // التحقق الإجباري من وجود صور وفيديوهات
     if (selectedImages.isEmpty && selectedVideos.isEmpty) {
-      _showErrorSnackbar(LangKeys.pleaseAddMedia);
+      _showErrorSnackbar(LangKeys.mediaRequired);
+      return;
+    }
+    
+    // التحقق من وجود صور على الأقل
+    if (selectedImages.isEmpty) {
+      _showErrorSnackbar(LangKeys.imagesRequired);
+      return;
+    }
+    
+    // التحقق من وجود فيديو على الأقل
+    if (selectedVideos.isEmpty) {
+      _showErrorSnackbar(LangKeys.videosRequired);
       return;
     }
 

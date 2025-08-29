@@ -3,12 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
+import 'package:chewie/chewie.dart';
 
 import '../../../../core/helpers/extensions.dart';
 import '../../../../core/language/lang_keys.dart';
 import '../../../../core/theme/Color/colors.dart';
 
 import '../widget/file_upload_button.dart';
+import '../widget/video_player_screen.dart';
 import '../../../inventory/data/model/inventory_response.dart' as inv;
 
 class CleanlinessTab extends StatefulWidget {
@@ -586,65 +589,97 @@ class _CleanlinessTabState extends State<CleanlinessTab> {
             ],
           ),
           SizedBox(height: 12.h),
-          ListView.builder(
+          GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 8.w,
+              mainAxisSpacing: 8.h,
+              childAspectRatio: 1.0,
+            ),
             itemCount: _selectedVideos.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.only(bottom: 12.h),
-                padding: EdgeInsets.all(12.w),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: BorderRadius.circular(10.r),
-                  border: Border.all(color: Theme.of(context).dividerColor, width: 1),
+            itemBuilder: (context, index) => Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.video_file,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 32.sp,
+                      ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        _selectedVideos[index].name.length > 15 
+                            ? '${_selectedVideos[index].name.substring(0, 15)}...'
+                            : _selectedVideos[index].name,
+                        style: TextStyle(
+                          fontSize: 10.sp,
+                          color: Theme.of(context).colorScheme.onBackground,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: 'Cairo',
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 60.w,
-                      height: 60.h,
+                Positioned(
+                  top: 4.h,
+                  right: 4.w,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() => _selectedVideos.removeAt(index));
+                      widget.onVideosChanged(_selectedVideos);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(context.translate(LangKeys.deleteVideo)),
+                        backgroundColor: ColorApp.warning,
+                        duration: const Duration(seconds: 1),
+                      ));
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(4.w),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8.r),
+                        color: Theme.of(context).colorScheme.error,
+                        shape: BoxShape.circle,
                       ),
-                      child: Icon(Icons.video_file, color: Theme.of(context).colorScheme.primary, size: 24.sp),
-                    ),
-                    SizedBox(width: 12.w),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _selectedVideos[index].name,
-                            style: TextStyle(fontSize: 14.sp, color: Theme.of(context).colorScheme.onBackground, fontWeight: FontWeight.w600, fontFamily: 'Cairo'),
-                          ),
-                          SizedBox(height: 4.h),
-                          Text(
-                            '00:30', // Consider making this dynamic
-                            style: TextStyle(fontSize: 12.sp, color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7), fontFamily: 'Cairo'),
-                          ),
-                        ],
+                      child: Icon(
+                        Icons.close,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        size: 12.sp,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedVideos.removeAt(index);
-                        });
-                        widget.onVideosChanged(_selectedVideos);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(context.translate(LangKeys.deleteVideo)),
-                          backgroundColor: ColorApp.warning,
-                          duration: const Duration(seconds: 1),
-                        ));
-                      },
-                      child: Icon(Icons.close, color: Theme.of(context).colorScheme.error, size: 20.sp),
-                    ),
-                  ],
+                  ),
                 ),
-              );
-            },
+                Positioned(
+                  bottom: 4.h,
+                  left: 4.w,
+                  child: GestureDetector(
+                    onTap: () => _playVideo(_selectedVideos[index]),
+                    child: Container(
+                      padding: EdgeInsets.all(6.w),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary.withOpacity(0.8),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        Icons.play_arrow,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        size: 16.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 16.h),
         ],
@@ -722,5 +757,13 @@ class _CleanlinessTabState extends State<CleanlinessTab> {
         .replaceAll('٧', '7')
         .replaceAll('٨', '8')
         .replaceAll('٩', '9');
+  }
+
+  void _playVideo(XFile videoFile) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => VideoPlayerScreen(videoPath: videoFile.path),
+      ),
+    );
   }
 }

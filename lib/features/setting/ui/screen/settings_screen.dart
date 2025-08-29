@@ -14,6 +14,7 @@ import 'change_password_screen.dart';
 import 'privacy_policy_screen.dart';
 import 'terms_screen.dart';
 import 'language_screen.dart';
+import 'about_app_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -212,7 +213,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             title: context.translate(LangKeys.aboutApp),
                             subtitle: context.translate(LangKeys.aboutAppDesc),
                             onTap: () {
-                              // TODO: سيتم إضافة هذه الميزة قريباً
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AboutAppScreen(),
+                                ),
+                              );
                             },
                           ),
                           _buildListTile(

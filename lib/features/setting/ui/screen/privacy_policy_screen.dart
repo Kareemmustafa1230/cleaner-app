@@ -1,5 +1,7 @@
+import 'package:diyar/core/helpers/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/language/lang_keys.dart';
 import '../../../../core/theme/text_style/text_style.dart';
 import '../../../../core/language/app_localizations.dart';
 
@@ -158,7 +160,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   onTap: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('تم حفظ موافقتك على سياسة الخصوصية'),
+                        content: Text(context.translate(LangKeys.privacyPolicyConsentSaved)),
                         backgroundColor: Theme.of(context).colorScheme.secondary,
                         duration: const Duration(seconds: 3),
                       ),

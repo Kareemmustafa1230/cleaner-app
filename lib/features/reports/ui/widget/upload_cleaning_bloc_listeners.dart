@@ -3,6 +3,7 @@ import 'package:diyar/features/reports/logic/cubit/upload_cleaning_cubit.dart';
 import 'package:diyar/features/reports/logic/state/upload_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/language/lang_keys.dart';
 import '../../../../core/router/routers.dart';
 import '../../../../core/widget/showErrorSnackBar.dart';
 import '../../../../core/widget/showSuccesSnackBar.dart';
@@ -65,7 +66,18 @@ class UploadCleaningBlocListeners extends StatelessWidget {
             if (Navigator.canPop(context)) {
               Navigator.of(context).pop();
             }
-            showErrorSnackBar(context: context, title: error);
+            
+            // ترجمة رسائل الخطأ الخاصة بالتحقق
+            String errorMessage = error;
+            if (error == 'imagesRequired') {
+              errorMessage = context.translate(LangKeys.imagesRequired);
+            } else if (error == 'videosRequired') {
+              errorMessage = context.translate(LangKeys.videosRequired);
+            } else if (error == 'mediaRequired') {
+              errorMessage = context.translate(LangKeys.mediaRequired);
+            }
+            
+            showErrorSnackBar(context: context, title: errorMessage);
             
             // إعادة تعيين الحالة للسماح بالرفع مرة أخرى
             context.read<UploadCleaningCubit>().resetState();

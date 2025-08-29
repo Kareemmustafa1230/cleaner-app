@@ -91,6 +91,17 @@ class UploadCleaningCubit extends Cubit<UploadState> {
       return;
     }
     
+    // التحقق من وجود صور وفيديوهات
+    if (selectedImages.isEmpty) {
+      emit(UploadState.error(error: 'imagesRequired'));
+      return;
+    }
+    
+    if (selectedVideos.isEmpty) {
+      emit(UploadState.error(error: 'videosRequired'));
+      return;
+    }
+    
     _isUploading = true;
     emit(const UploadState.loading());
 
@@ -125,10 +136,10 @@ class UploadCleaningCubit extends Cubit<UploadState> {
           _isUploading = false;
           if (cleaningTimeController.text == "before") {
             emit(UploadState.successWithoutInventory(
-                message: response.message ?? "تم الحفظ بدون مخزون"));
+                message: response.message ?? "uploadSuccessWithoutInventoryMessage"));
           } else {
             emit(UploadState.success(
-                message: response.message ?? "تم الحفظ بنجاح"));
+                message: response.message ?? "uploadSuccessMessage"));
           }
         },
         failure: (error) {

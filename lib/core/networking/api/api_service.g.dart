@@ -255,7 +255,7 @@ class _ApiService implements ApiService {
     _headers.removeWhere((k, v) => v == null);
     final _data = formData;
     final _options = _setStreamType<UpdateProfileResponse>(Options(
-      method: 'PUT',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
       contentType: 'multipart/form-data',

@@ -161,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: [
                     Icon(Icons.camera_alt, size: 32.sp),
                     SizedBox(height: 8.h),
-                    Text('الكاميرا', style: TextStyle(fontSize: 14.sp)),
+                                            Text(context.translate(LangKeys.camera), style: TextStyle(fontSize: 14.sp)),
                   ],
                 ),
               ),
@@ -179,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen>
                   children: [
                     Icon(Icons.photo_library, size: 32.sp),
                     SizedBox(height: 8.h),
-                    Text('المعرض', style: TextStyle(fontSize: 14.sp)),
+                                            Text(context.translate(LangKeys.gallery), style: TextStyle(fontSize: 14.sp)),
                   ],
                 ),
               ),

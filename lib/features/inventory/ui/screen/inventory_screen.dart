@@ -54,7 +54,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
               color: ColorApp.white,
             ),
             label: Text(
-              "إعادة المحاولة",
+              context.translate(LangKeys.retry),
               style: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w600,
@@ -99,7 +99,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
               SizedBox(width: 8.w),
               Expanded(
                 child: Text(
-                  "فشل في تحميل المزيد من العناصر",
+                  context.translate(LangKeys.loadMoreError),
                   style: TextStyle(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
@@ -132,7 +132,7 @@ class _InventoryScreenState extends State<InventoryScreen> {
                 color: ColorApp.white,
               ),
               label: Text(
-                "المحاولة مرة أخرى",
+                context.translate(LangKeys.tryAgain),
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w600,
