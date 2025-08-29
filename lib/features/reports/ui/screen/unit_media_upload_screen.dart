@@ -457,6 +457,11 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
       return;
     }
 
+    // التحقق من الحقول المطلوبة حسب نوع الوسائط
+    if (!_validateRequiredFields(mediaType)) {
+      return;
+    }
+
     switch (mediaType) {
       case 'cleanliness':
         _handleCleaningUpload(context);
@@ -471,6 +476,73 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
         _handlePestControlUpload(context);
         break;
     }
+  }
+
+  bool _validateRequiredFields(String mediaType) {
+    List<String> missingFields = [];
+    
+    switch (mediaType) {
+      case 'cleanliness':
+        // التحقق من نوع النظافة
+        if (_selectedCleaningType.isEmpty) {
+          missingFields.add(context.translate(LangKeys.cleaningType));
+        }
+        
+        // التحقق من توقيت النظافة
+        if (_selectedCleaningTiming.isEmpty) {
+          missingFields.add(context.translate(LangKeys.cleaningTiming));
+        }
+        
+        // التحقق من سعر النظافة إذا كان التوقيت "بعد"
+        if (_selectedCleaningTiming == 'after' && _cleaningPrice.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.cleaningPrice));
+        }
+        break;
+        
+      case 'damages':
+        // التحقق من وصف التلفيات
+        if (_damageDescription.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.description));
+        }
+        
+        // التحقق من سعر التلفيات
+        if (_damagePrice.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.damagePrice));
+        }
+        break;
+        
+      case 'maintenance':
+        // التحقق من وصف الصيانة
+        if (_maintenanceDescription.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.maintenanceDescription));
+        }
+        
+        // التحقق من سعر الصيانة
+        if (_maintenancePrice.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.maintenancePrice));
+        }
+        break;
+        
+      case 'pestControl':
+        // التحقق من وصف المبيدات الحشرية
+        if (_pestControlDescription.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.pestControlDescription));
+        }
+        
+        // التحقق من سعر المبيدات الحشرية
+        if (_pestControlPrice.trim().isEmpty) {
+          missingFields.add(context.translate(LangKeys.pestControlPrice));
+        }
+        break;
+    }
+    
+    if (missingFields.isNotEmpty) {
+      String message = '${context.translate(LangKeys.pleaseCompleteAllFields)}:\n${missingFields.join(', ')}';
+      _showErrorSnackbar(message, isCustomMessage: true);
+      return false;
+    }
+    
+    return true;
   }
 
   void _handleCleaningUpload(BuildContext context) {
@@ -545,13 +617,13 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
     return 0;
   }
 
-  void _showErrorSnackbar(String messageKey) {
+  void _showErrorSnackbar(String messageKey, {bool isCustomMessage = false}) {
     if (!mounted) return;
-    final translatedMessage = context.translate(messageKey);
+    final message = isCustomMessage ? messageKey : context.translate(messageKey);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text(translatedMessage),
+      content: Text(message),
       backgroundColor: Theme.of(context).colorScheme.error,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
     ));
   }
 }

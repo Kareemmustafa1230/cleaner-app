@@ -320,7 +320,6 @@ class LangKeys {
   static const String noInventoryItems = 'noInventoryItems';
   static const String uploadImages = 'uploadImages';
   static const String uploadVideos = 'uploadVideos';
-  static const String cleaningTypeRequired = 'cleaningTypeRequired';
   
   // مفاتيح رسائل الرفع
   static const String uploadSuccessWithoutInventoryMessage = 'uploadSuccessWithoutInventoryMessage';
@@ -343,6 +342,10 @@ class LangKeys {
   static const String imagesRequired = 'imagesRequired';
   static const String videosRequired = 'videosRequired';
   static const String mediaRequired = 'mediaRequired';
+  static const String cleaningTypeRequired = 'cleaningTypeRequired';
+  static const String cleaningTimingRequired = 'cleaningTimingRequired';
+  static const String damageDescriptionRequired = 'damageDescriptionRequired';
+  static const String pleaseCompleteAllFields = 'pleaseCompleteAllFields';
   
   // مفاتيح صفحة حول التطبيق
   static const String aboutAppTitle = 'aboutAppTitle';
