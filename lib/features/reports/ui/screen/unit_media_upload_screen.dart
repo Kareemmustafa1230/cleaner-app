@@ -10,12 +10,14 @@ import '../../data/model/upload_request.dart';
 import '../../logic/cubit/upload_cleaning_cubit.dart';
 import '../../logic/state/upload_state.dart';
 import '../../logic/cubit/upload_damage_cubit.dart';
+import '../../logic/cubit/upload_pest_maintenance_cubit.dart';
 import '../widget/cleanliness_tab.dart';
 import '../widget/damages_tab.dart';
 import '../widget/maintenance_tab.dart';
 import '../widget/pest_control_tab.dart';
 import '../widget/upload_cleaning_bloc_listeners.dart';
 import '../widget/upload_damage_bloc_listeners.dart';
+import '../widget/upload_pest_maintenance_bloc_listeners.dart';
 import '../../../inventory/data/model/inventory_response.dart' as inv;
 
 class UnitMediaUploadScreen extends StatefulWidget {
@@ -80,22 +82,41 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
     return MultiBlocProvider(
       providers: [
         BlocProvider<UploadCleaningCubit>(
-          create: (context) => getIt<UploadCleaningCubit>(),
+          create: (context) {
+            final cubit = getIt<UploadCleaningCubit>();
+            cubit.resetState();
+            return cubit;
+          },
         ),
         BlocProvider<UploadDamageCubit>(
-          create: (context) => getIt<UploadDamageCubit>(),
+          create: (context) {
+            final cubit = getIt<UploadDamageCubit>();
+            cubit.resetState();
+            return cubit;
+          },
+        ),
+        BlocProvider<UploadPestMaintenanceCubit>(
+          create: (context) {
+            final cubit = getIt<UploadPestMaintenanceCubit>();
+            cubit.resetState();
+            return cubit;
+          },
         ),
       ],
       child: BlocBuilder<UploadCleaningCubit, UploadState>(
         builder: (context, cleaningState) {
           return BlocBuilder<UploadDamageCubit, UploadState>(
             builder: (context, damageState) {
-              final isLoading = cleaningState is Loading ||
-                  damageState is Loading;
+              return BlocBuilder<UploadPestMaintenanceCubit, UploadState>(
+                builder: (context, pestMaintenanceState) {
+                  final isLoading = cleaningState is Loading ||
+                      damageState is Loading ||
+                      pestMaintenanceState is Loading;
               return Stack(
                 children: [
                   const UploadCleaningBlocListeners(),
                   const UploadDamageBlocListeners(),
+                  const UploadPestMaintenanceBlocListeners(),
                   Scaffold(
                     backgroundColor: ColorApp.white,
                     appBar: AppBar(
@@ -318,78 +339,84 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
               );
             },
           );
-        }
-        ),
-    );
+        },
+      );
+    },
+      )
+  );
   }
 
   Widget _buildTabContent(Widget tabContent, String mediaType, bool isLoading) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          tabContent,
-          SizedBox(height: 32.h),
-          Container(
-            width: double.infinity,
-            height: 56.h,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.r),
-              gradient: LinearGradient(
-                colors: [
-                  Theme.of(context).colorScheme.primary,
-                  Theme.of(context).colorScheme.secondary
-                ],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(15.r),
-                onTap: isLoading ? null : () => _handleUpload(mediaType),
-                child: Center(
-                  child: isLoading
-                      ? SizedBox(
-                          width: 24.w,
-                          height: 24.h,
-                          child: CircularProgressIndicator(
-                            color: Theme.of(context).colorScheme.onPrimary,
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.upload,
-                              color: Theme.of(context).colorScheme.onPrimary,
-                              size: 20.sp,
-                            ),
-                            SizedBox(width: 8.w),
-                            Text(
-                              context.translate(LangKeys.uploadContent),
-                              style: TextStyle(
+    return Builder(
+      builder: (context) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              tabContent,
+              SizedBox(height: 32.h),
+              Container(
+                width: double.infinity,
+                height: 56.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.r),
+                  gradient: LinearGradient(
+                    colors: [
+                      Theme.of(context).colorScheme.primary,
+                      Theme.of(context).colorScheme.secondary
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(15.r),
+                    onTap: isLoading ? null : () => _handleUpload(mediaType, context),
+                    child: Center(
+                      child: isLoading
+                          ? SizedBox(
+                              width: 24.w,
+                              height: 24.h,
+                              child: CircularProgressIndicator(
                                 color: Theme.of(context).colorScheme.onPrimary,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: 'Cairo',
+                                strokeWidth: 2,
                               ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.upload,
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                  size: 20.sp,
+                                ),
+                                SizedBox(width: 8.w),
+                                Text(
+                                  context.translate(LangKeys.uploadContent),
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'Cairo',
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
-  void _handleUpload(String mediaType) {
+  void _handleUpload(String mediaType, BuildContext context) {
     List<XFile> selectedImages = [];
     List<XFile> selectedVideos = [];
 
@@ -407,8 +434,8 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
         selectedVideos = _maintenanceVideos;
         break;
       case 'pestControl':
-        selectedImages = _pestControlImages;
         selectedVideos = _pestControlVideos;
+        selectedImages = _pestControlImages;
         break;
     }
 
@@ -419,24 +446,22 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
 
     switch (mediaType) {
       case 'cleanliness':
-        _handleCleaningUpload();
+        _handleCleaningUpload(context);
         break;
       case 'damages':
-        _handleDamageUpload();
+        _handleDamageUpload(context);
         break;
       case 'maintenance':
-        _handleMaintenanceUpload();
-        _showErrorSnackbar("هذا النوع قيد التطوير");
+        _handleMaintenanceUpload(context);
         break;
       case 'pestControl':
-        _handlePestControlUpload();
-        _showErrorSnackbar("هذا النوع قيد التطوير");
+        _handlePestControlUpload(context);
         break;
     }
   }
 
-  void _handleCleaningUpload() {
-    final cubit = getIt<UploadCleaningCubit>();
+  void _handleCleaningUpload(BuildContext context) {
+    final cubit = context.read<UploadCleaningCubit>();
     cubit.chaletIdController.text = _selectedUnit.isNotEmpty ? _selectedUnit : widget.chaletsId;
     cubit.cleaningTypeController.text = _selectedCleaningType;
     cubit.cleaningTimeController.text = _selectedCleaningTiming;
@@ -459,8 +484,8 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
     cubit.emitUpdateCleaningState();
   }
 
-  void _handleDamageUpload() {
-    final cubit = getIt<UploadDamageCubit>();
+  void _handleDamageUpload(BuildContext context) {
+    final cubit = context.read<UploadDamageCubit>();
     cubit.chaletIdController.text = _selectedUnit.isNotEmpty ? _selectedUnit : widget.chaletsId;
     cubit.descriptionController.text = _damageDescription.trim();
     cubit.priceController.text = _damagePrice.trim();
@@ -469,16 +494,28 @@ class _UnitMediaUploadScreenState extends State<UnitMediaUploadScreen> with Tick
     cubit.emitUploadDamageState();
   }
 
-  void _handleMaintenanceUpload() {
-    // TODO: Implement maintenance upload when ready
-    print('Maintenance upload - Description: $_maintenanceDescription, Price: $_maintenancePrice');
-    print('Maintenance images: ${_maintenanceImages.length}, videos: ${_maintenanceVideos.length}');
+  void _handleMaintenanceUpload(BuildContext context) {
+    final cubit = context.read<UploadPestMaintenanceCubit>();
+    cubit.serviceTypeController.text = 'maintenance';
+    cubit.chaletIdController.text = _selectedUnit.isNotEmpty ? _selectedUnit : widget.chaletsId;
+    cubit.descriptionController.text = _maintenanceDescription.trim();
+    cubit.priceController.text = _maintenancePrice.trim();
+    cubit.cleaningTimeController.text = _maintenancePrice.isNotEmpty ? 'after' : 'before';
+    cubit.selectedImages = _maintenanceImages;
+    cubit.selectedVideos = _maintenanceVideos;
+    cubit.emitUploadPestMaintenance();
   }
 
-  void _handlePestControlUpload() {
-    // TODO: Implement pest control upload when ready
-    print('Pest control upload - Description: $_pestControlDescription, Price: $_pestControlPrice');
-    print('Pest control images: ${_pestControlImages.length}, videos: ${_pestControlVideos.length}');
+  void _handlePestControlUpload(BuildContext context) {
+    final cubit = context.read<UploadPestMaintenanceCubit>();
+    cubit.serviceTypeController.text = 'pest_control';
+    cubit.chaletIdController.text = _selectedUnit.isNotEmpty ? _selectedUnit : widget.chaletsId;
+    cubit.descriptionController.text = _pestControlDescription.trim();
+    cubit.priceController.text = _pestControlPrice.trim();
+    cubit.cleaningTimeController.text = _pestControlPrice.isNotEmpty ? 'after' : 'before';
+    cubit.selectedImages = _pestControlImages;
+    cubit.selectedVideos = _pestControlVideos;
+    cubit.emitUploadPestMaintenance();
   }
 
   int _getItemIdAsInt(String itemId) {

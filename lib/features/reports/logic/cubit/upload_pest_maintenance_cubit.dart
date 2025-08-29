@@ -2,28 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import '../../data/model/upload_request.dart';
-import '../../data/repo/upload_cleaning_repo.dart';
+import '../../data/model/upload_pest_maintenance_request.dart';
+import '../../data/repo/upload_pest_maintenance_repo.dart';
 import '../state/upload_state.dart';
 
-class UploadCleaningCubit extends Cubit<UploadState> {
-  final UploadCleaningRepo _uploadCleaningRepo;
+class UploadPestMaintenanceCubit extends Cubit<UploadState> {
+  final UploadPestMaintenanceRepo _uploadPestMaintenanceRepo;
 
-  UploadCleaningCubit(this._uploadCleaningRepo)
+  UploadPestMaintenanceCubit(this._uploadPestMaintenanceRepo)
       : super(const UploadState.initial());
 
   // Controllers للمدخلات الأساسية
-  TextEditingController cleaningTypeController = TextEditingController();
+  TextEditingController serviceTypeController = TextEditingController();
   TextEditingController chaletIdController = TextEditingController();
   TextEditingController cleaningTimeController = TextEditingController();
-  TextEditingController cleaningCostController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
 
   // صور وفيديوهات
   List<XFile> selectedImages = [];
   List<XFile> selectedVideos = [];
-
-  // Inventory Items
-  List<InventoryItem> inventoryItems = [];
 
   // متغير لتتبع حالة الرفع
   bool _isUploading = false;
@@ -40,106 +38,92 @@ class UploadCleaningCubit extends Cubit<UploadState> {
     emit(const UploadState.pickMediaSuccess());
   }
 
-  /// إضافة عنصر مخزون
-  void addInventoryItem(InventoryItem item) {
-    inventoryItems.add(item);
-    emit(const UploadState.inventoryUpdated());
-  }
-
-
   /// إعادة تعيين الحالة إلى الحالة الأولية
   void resetState() {
     if (isClosed) return;
     _isUploading = false;
-    
+
     // Clear all controllers
-    cleaningTypeController.clear();
+    serviceTypeController.clear();
     chaletIdController.clear();
     cleaningTimeController.clear();
-    cleaningCostController.clear();
-    
+    priceController.clear();
+    descriptionController.clear();
+
     // Clear all lists
     selectedImages.clear();
     selectedVideos.clear();
-    inventoryItems.clear();
-    
+
     emit(const UploadState.initial());
   }
 
   @override
   Future<void> close() {
     // Dispose controllers
-    cleaningTypeController.dispose();
+    serviceTypeController.dispose();
     chaletIdController.dispose();
     cleaningTimeController.dispose();
-    cleaningCostController.dispose();
-    
+    priceController.dispose();
+    descriptionController.dispose();
+
     // Clear lists
     selectedImages.clear();
     selectedVideos.clear();
-    inventoryItems.clear();
-    
+
     return super.close();
   }
 
-  Future<void> emitUpdateCleaningState() async {
-    if (isClosed) return; // فحص إذا كان الـ cubit مغلق
-    
-    // فحص إذا كان الرفع جارٍ بالفعل
+  Future<void> emitUploadPestMaintenance() async {
+    if (isClosed) return;
+
     if (_isUploading) {
-      print('UploadCleaningCubit: Already uploading, skipping...');
+      print('UploadPestMaintenanceCubit: Already uploading, skipping...');
       return;
     }
-    
+
     _isUploading = true;
     emit(const UploadState.loading());
 
     try {
-      // تنسيق التاريخ الحالي
-      final now = DateTime.now();
-      final formattedDate = DateFormat("yyyy-MM-dd").format(now);
-
-      final uploadRequest = UploadRequest(
-        cleaningType: cleaningTypeController.text,
+      // بناء الـ Request
+      final request = UploadPestMaintenanceRequest(
+        serviceType: serviceTypeController.text,
         chaletId: chaletIdController.text,
         cleaningTime: cleaningTimeController.text,
-        date: formattedDate,
-        cleaningCost: cleaningTimeController.text == "after"
-            ? cleaningCostController.text
+        description: descriptionController.text,
+        price: cleaningTimeController.text == "after"
+            ? priceController.text
             : null,
         images: selectedImages.map((e) => e.path).toList(),
         videos: selectedVideos.map((e) => e.path).toList(),
-        inventoryItems: cleaningTimeController.text == "after"
-            ? inventoryItems
-            : null,
       );
 
-      final updateProfileResponse =
-      await _uploadCleaningRepo.uploadCleaning(uploadRequest);
+      final responseResult =
+      await _uploadPestMaintenanceRepo.uploadPestMaintenance(request);
 
-      if (isClosed) return; // فحص مرة أخرى بعد الـ API call
+      if (isClosed) return;
 
-      await updateProfileResponse.when(
+      await responseResult.when(
         success: (response) async {
-          if (isClosed) return; // فحص قبل إرسال الحالة النهائية
+          if (isClosed) return;
           _isUploading = false;
+
           if (cleaningTimeController.text == "before") {
             emit(UploadState.successWithoutInventory(
-                message: response.message ?? "تم الحفظ بدون مخزون"));
+                message: response.message ?? "تم الحفظ بدون سعر"));
           } else {
             emit(UploadState.success(
                 message: response.message ?? "تم الحفظ بنجاح"));
           }
         },
         failure: (error) {
-          if (isClosed) return; // فحص قبل إرسال حالة الخطأ
+          if (isClosed) return;
           _isUploading = false;
-          emit(UploadState.error(
-              error: error.apiErrorModel.message));
+          emit(UploadState.error(error: error.apiErrorModel.message));
         },
       );
     } catch (e) {
-      if (isClosed) return; // فحص قبل إرسال حالة الخطأ
+      if (isClosed) return;
       _isUploading = false;
       emit(UploadState.error(error: e.toString()));
     }

@@ -9,7 +9,7 @@ class ApiConstants {
   static const String chaletsInfo = "chalets/info";
   static const String uploadCleaning = "cleaning/upload";
   static const String uploadDamage = "damages/upload";
-
+  static const String uploadPestMaintenance = "services/upload";
 
 
   //static const String uploadImage = "driver/upload-image-before-register";

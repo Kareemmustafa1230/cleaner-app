@@ -40,7 +40,31 @@ class UploadDamageCubit extends Cubit<UploadState> {
   void resetState() {
     if (isClosed) return;
     _isUploading = false;
+    
+    // Clear all controllers
+    descriptionController.clear();
+    chaletIdController.clear();
+    priceController.clear();
+    
+    // Clear all lists
+    selectedImages.clear();
+    selectedVideos.clear();
+    
     emit(const UploadState.initial());
+  }
+
+  @override
+  Future<void> close() {
+    // Dispose controllers
+    descriptionController.dispose();
+    chaletIdController.dispose();
+    priceController.dispose();
+    
+    // Clear lists
+    selectedImages.clear();
+    selectedVideos.clear();
+    
+    return super.close();
   }
 
   Future<void> emitUploadDamageState() async {

@@ -38,6 +38,11 @@ abstract class ApiService {
       @Header('Accept') String accept,
       );
 
+  @POST(ApiConstants.uploadPestMaintenance)
+  Future<UploadResponse> uploadPestMaintenance(
+      @Body() FormData formData,
+      @Header('Accept') String accept,
+      );
 
 
   @POST(ApiConstants.logout)

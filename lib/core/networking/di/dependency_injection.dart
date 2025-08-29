@@ -22,6 +22,9 @@ import '../../../features/inventory/logic/cubit/inventory_cubit.dart';
 import '../../../features/reports/data/data_source/upload_cleaning_data_source.dart';
 import '../../../features/reports/data/repo/upload_cleaning_repo.dart';
 import '../../../features/reports/logic/cubit/upload_cleaning_cubit.dart';
+import '../../../features/reports/data/repo/upload_pest_maintenance_repo.dart';
+import '../../../features/reports/logic/cubit/upload_pest_maintenance_cubit.dart';
+import '../../../features/reports/data/data_source/upload_pest_maintenance_data_source.dart';
 import '../../../features/setting/data/data_source/update_profile_data_source.dart';
 import '../../../features/setting/data/repo/update_profile_repo.dart';
 import '../../../features/setting/logic/cubit/update_profile_cubit.dart';
@@ -70,11 +73,16 @@ Future<void> setupGetIt() async {
 
   //UploadCleaning
   getIt.registerLazySingleton<UploadCleaningRepo>(() => UploadCleaningRepo(getIt()));
-  getIt.registerLazySingleton<UploadCleaningCubit>(() => UploadCleaningCubit(getIt()));
+  getIt.registerFactory<UploadCleaningCubit>(() => UploadCleaningCubit(getIt()));
   getIt.registerLazySingleton<UploadCleaningDataSource>(() => UploadCleaningDataSource(getIt()));
 
   //UploadDamage
   getIt.registerLazySingleton<UploadDamageRepo>(() => UploadDamageRepo(getIt()));
-  getIt.registerLazySingleton<UploadDamageCubit>(() => UploadDamageCubit(getIt()));
+  getIt.registerFactory<UploadDamageCubit>(() => UploadDamageCubit(getIt()));
   getIt.registerLazySingleton<UploadDamageDataSource>(() => UploadDamageDataSource(getIt()));
+
+  //UploadPestMaintenance
+  getIt.registerLazySingleton<UploadPestMaintenanceRepo>(() => UploadPestMaintenanceRepo(getIt()));
+  getIt.registerFactory<UploadPestMaintenanceCubit>(() => UploadPestMaintenanceCubit(getIt()));
+  getIt.registerLazySingleton<UploadPestMaintenanceDataSource>(() => UploadPestMaintenanceDataSource(getIt()));
 }
